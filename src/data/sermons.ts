@@ -12,7 +12,7 @@ const sermons: Sermon[] = [
   {
     id: 'grace-that-finds-us',
     title: 'The Grace That Finds Us',
-    speaker: 'Pastor Daniel Mensah',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-05-03',
     scripture: 'Romans 3:23–24',
     summary:
@@ -23,7 +23,7 @@ const sermons: Sermon[] = [
   {
     id: 'a-quiet-faith',
     title: 'A Quiet Faith in a Loud World',
-    speaker: 'Pastor Naomi Becker',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-04-26',
     scripture: 'Psalm 46:10',
     summary:
@@ -34,7 +34,7 @@ const sermons: Sermon[] = [
   {
     id: 'house-of-grace',
     title: 'House of Grace',
-    speaker: 'Pastor Daniel Mensah',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-04-19',
     scripture: 'Ephesians 2:19–22',
     summary:
@@ -45,7 +45,7 @@ const sermons: Sermon[] = [
   {
     id: 'serve-as-worship',
     title: 'Serving as Worship',
-    speaker: 'Elder Ruth Anand',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-04-12',
     scripture: 'Romans 12:1',
     summary:
@@ -56,7 +56,7 @@ const sermons: Sermon[] = [
   {
     id: 'word-becomes-flesh',
     title: 'When the Word Becomes Flesh',
-    speaker: 'Pastor Daniel Mensah',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-04-05',
     scripture: 'John 1:14',
     summary:
@@ -67,7 +67,7 @@ const sermons: Sermon[] = [
   {
     id: 'prayer-that-honest',
     title: 'Honest Prayer',
-    speaker: 'Pastor Naomi Becker',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-03-29',
     scripture: 'Psalm 13',
     summary: 'Why the Psalms give us permission to pray uncomfortable, honest prayers.',
@@ -77,7 +77,7 @@ const sermons: Sermon[] = [
   {
     id: 'youth-and-truth',
     title: 'A Generation Looking for Truth',
-    speaker: 'Pastor Samuel Okafor',
+    speaker: 'Pastor Stephen Essah',
     date: '2026-03-22',
     scripture: '1 Timothy 4:12',
     summary:
