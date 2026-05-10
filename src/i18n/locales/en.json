@@ -45,6 +45,10 @@
       "title": "Announcements",
       "description": "News from the church family",
       "empty": "Nothing new to share right now."
+    },
+    "findUs": {
+      "title": "Find us",
+      "directionsLabel": "Get directions"
     }
   },
   "assistant": {

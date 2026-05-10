@@ -12,6 +12,7 @@ const eventRows: string[][] = getWeeklySchedule().map((s) => [
   s.weekday,
   s.time,
   s.title,
+  s.cadence,
   s.location,
   'Active',
 ]);
@@ -20,8 +21,8 @@ const sections: AdminSection[] = [
   {
     id: 'events',
     title: 'Manage Events',
-    description: 'Read-only preview of the recurring weekly schedule.',
-    columns: ['Day', 'Time', 'Event', 'Location', 'Status'],
+    description: 'Read-only preview of the recurring schedule.',
+    columns: ['Day', 'Time', 'Event', 'Cadence', 'Location', 'Status'],
     rows: eventRows,
   },
   {

@@ -9,6 +9,8 @@ export type ChurchEvent = {
 
 type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Sunday
 
+type Frequency = { kind: 'weekly' } | { kind: 'biweekly'; anchor: string }; // anchor: ISO date "YYYY-MM-DD" of any past or upcoming occurrence
+
 type RecurringPattern = {
   id: string;
   title: string;
@@ -19,7 +21,10 @@ type RecurringPattern = {
   endMinute: number;
   location: string;
   summary: string;
+  frequency?: Frequency;
 };
+
+export const CHURCH_ADDRESS = 'Langestr. 19A, 49080 Osnabrück';
 
 const patterns: RecurringPattern[] = [
   {
@@ -41,7 +46,7 @@ const patterns: RecurringPattern[] = [
     startMinute: 0,
     endHour: 19,
     endMinute: 30,
-    location: 'Church premises',
+    location: CHURCH_ADDRESS,
     summary: 'Mid-week teaching and discussion in the Word.',
   },
   {
@@ -52,7 +57,7 @@ const patterns: RecurringPattern[] = [
     startMinute: 0,
     endHour: 19,
     endMinute: 30,
-    location: 'Church premises',
+    location: CHURCH_ADDRESS,
     summary: 'A time of prayer together at church.',
   },
   {
@@ -67,6 +72,19 @@ const patterns: RecurringPattern[] = [
     summary: 'Friday evening prayer — joining online from wherever you are.',
   },
   {
+    id: 'youth-service',
+    title: 'Youth Service',
+    weekday: 0,
+    startHour: 11,
+    startMinute: 0,
+    endHour: 12,
+    endMinute: 30,
+    location: CHURCH_ADDRESS,
+    summary: 'A worship service led by and for the young people of the church. Every other Sunday.',
+    // Anchor: 2026-05-17 is the next youth service — alternates from there.
+    frequency: { kind: 'biweekly', anchor: '2026-05-17' },
+  },
+  {
     id: 'sunday-service',
     title: 'Sunday Service',
     weekday: 0,
@@ -74,12 +92,12 @@ const patterns: RecurringPattern[] = [
     startMinute: 30,
     endHour: 15,
     endMinute: 30,
-    location: 'Church premises',
+    location: CHURCH_ADDRESS,
     summary: 'Worship, teaching, and fellowship as the gathered church family.',
   },
 ];
 
-function nextOccurrence(
+function nextWeeklyOccurrence(
   weekday: Weekday,
   hour: number,
   minute: number,
@@ -89,7 +107,6 @@ function nextOccurrence(
   candidate.setSeconds(0, 0);
   const today = candidate.getDay();
   let daysUntil = (weekday - today + 7) % 7;
-  // If it's the same weekday but the time has already passed today, push a week.
   const sameDayCandidate = new Date(candidate);
   sameDayCandidate.setHours(hour, minute, 0, 0);
   if (daysUntil === 0 && sameDayCandidate.getTime() <= from.getTime()) {
@@ -100,8 +117,37 @@ function nextOccurrence(
   return candidate;
 }
 
+function nextBiweeklyOccurrence(
+  weekday: Weekday,
+  hour: number,
+  minute: number,
+  anchor: string,
+  from: Date,
+): Date {
+  const next = nextWeeklyOccurrence(weekday, hour, minute, from);
+  const anchorDate = new Date(`${anchor}T00:00:00`);
+  const dayMs = 86400000;
+  const dayStart = (d: Date) => {
+    const x = new Date(d);
+    x.setHours(0, 0, 0, 0);
+    return x.getTime();
+  };
+  const diffDays = Math.round((dayStart(next) - dayStart(anchorDate)) / dayMs);
+  const remainder = ((diffDays % 14) + 14) % 14;
+  if (remainder !== 0) {
+    next.setDate(next.getDate() + (14 - remainder));
+  }
+  return next;
+}
+
+function nextOccurrence(p: RecurringPattern, from: Date): Date {
+  if (p.frequency?.kind === 'biweekly') {
+    return nextBiweeklyOccurrence(p.weekday, p.startHour, p.startMinute, p.frequency.anchor, from);
+  }
+  return nextWeeklyOccurrence(p.weekday, p.startHour, p.startMinute, from);
+}
+
 function isoLocal(d: Date): string {
-  // Local-time ISO (no Z) so the same wall-clock hour is shown to the viewer.
   const pad = (n: number) => n.toString().padStart(2, '0');
   return (
     `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}` +
@@ -112,7 +158,7 @@ function isoLocal(d: Date): string {
 function buildUpcoming(count: number, from: Date = new Date()): ChurchEvent[] {
   return patterns
     .map((p) => {
-      const start = nextOccurrence(p.weekday, p.startHour, p.startMinute, from);
+      const start = nextOccurrence(p, from);
       const end = new Date(start);
       end.setHours(p.endHour, p.endMinute, 0, 0);
       return {
@@ -129,15 +175,16 @@ function buildUpcoming(count: number, from: Date = new Date()): ChurchEvent[] {
 }
 
 export async function getEvents(): Promise<ChurchEvent[]> {
-  return buildUpcoming(5);
+  return buildUpcoming(6);
 }
 
-/** Stable, presentation-friendly view of the recurring weekly rhythm — used by the Admin Preview. */
+/** Stable, presentation-friendly view of the recurring rhythm — used by the Admin Preview. */
 export function getWeeklySchedule(): Array<{
   weekday: string;
   time: string;
   title: string;
   location: string;
+  cadence: string;
 }> {
   const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const fmt = (h: number, m: number) =>
@@ -145,14 +192,16 @@ export function getWeeklySchedule(): Array<{
   return patterns
     .slice()
     .sort((a, b) => {
-      // Order Mon→Sun for human reading
       const ord = (w: Weekday) => (w === 0 ? 7 : w);
-      return ord(a.weekday) - ord(b.weekday);
+      const dayDiff = ord(a.weekday) - ord(b.weekday);
+      if (dayDiff !== 0) return dayDiff;
+      return a.startHour - b.startHour;
     })
     .map((p) => ({
       weekday: weekdayNames[p.weekday],
       time: `${fmt(p.startHour, p.startMinute)}–${fmt(p.endHour, p.endMinute)}`,
       title: p.title,
       location: p.location,
+      cadence: p.frequency?.kind === 'biweekly' ? 'Every 2 weeks' : 'Weekly',
     }));
 }

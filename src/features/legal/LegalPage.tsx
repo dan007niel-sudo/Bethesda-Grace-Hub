@@ -230,8 +230,8 @@ function AVV() {
     <>
       <Section heading="1. Parteien">
         <p>
-          Dieser AVV wird zwischen der <strong>Bethesda Evangelical Church · House of Grace</strong>{' '}
-          als Auftraggeber (Anschrift wird durch die Gemeinde ergänzt) und Daniel Lordson Arnan,
+          Dieser AVV wird zwischen der <strong>Bethesda Evangelical Church · House of Grace</strong>,
+          Langestr. 19A, 49080 Osnabrück, als Auftraggeber und Daniel Lordson Arnan,
           Einzelunternehmen, Weselerstr. 120, 45478 Mülheim an der Ruhr, als Anbieter von Bethesda
           Grace Hub und Auftragsverarbeiter geschlossen.
         </p>

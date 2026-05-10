@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, BookOpen, HandHeart, HeartHandshake } from 'lucide-react';
+import { Sparkles, BookOpen, HandHeart, HeartHandshake, MapPin } from 'lucide-react';
 import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { EmptyState } from '../../components/EmptyState';
@@ -9,7 +9,7 @@ import { Wordmark } from '../../components/Wordmark';
 import { Logo } from '../../components/Logo';
 import { EventItem } from '../../components/EventItem';
 import { AnnouncementItem } from '../../components/AnnouncementItem';
-import { getEvents, type ChurchEvent } from '../../data/events';
+import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
 import { getSermons } from '../../data/sermons';
 
@@ -33,7 +33,7 @@ export default function HomePage() {
         getAnnouncements(),
         getSermons(),
       ]);
-      setEvents(evs.slice(0, 5));
+      setEvents(evs.slice(0, 6));
       setAnnouncements(anns.slice(0, 3));
       setLatestSermonId(sermons[0]?.id ?? null);
     })();
@@ -138,6 +138,30 @@ export default function HomePage() {
             </div>
           </Card>
         )}
+      </section>
+
+      {/* Find us */}
+      <section aria-labelledby="find-us-heading">
+        <SectionHeader title={t('home.findUs.title')} />
+        <Card padding="md" className="flex items-start gap-4">
+          <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-burgundy/10 text-burgundy">
+            <MapPin size={18} aria-hidden="true" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-medium text-charcoal">Bethesda Evangelical Church · House of Grace</p>
+            <p className="text-sm text-charcoal/70 mt-0.5">{CHURCH_ADDRESS}</p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `Bethesda Evangelical Church ${CHURCH_ADDRESS}`,
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center text-sm font-medium text-burgundy hover:underline"
+            >
+              {t('home.findUs.directionsLabel')} →
+            </a>
+          </div>
+        </Card>
       </section>
     </div>
   );
