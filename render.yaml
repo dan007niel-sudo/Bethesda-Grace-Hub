@@ -7,7 +7,7 @@ services:
     pullRequestPreviewsEnabled: true
     envVars:
       - key: NODE_VERSION
-        value: 20.18.0
+        value: 22.14.0
     headers:
       # Service worker must never be cached by the CDN — otherwise users
       # stay stuck on an old shell after a deploy.
