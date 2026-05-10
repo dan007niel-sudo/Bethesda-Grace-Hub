@@ -9,6 +9,8 @@ import { Wordmark } from '../../components/Wordmark';
 import { Logo } from '../../components/Logo';
 import { EventItem } from '../../components/EventItem';
 import { AnnouncementItem } from '../../components/AnnouncementItem';
+import { ChurchMap } from '../../components/ChurchMap';
+import { Directions } from '../../components/Directions';
 import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
 import { getSermons } from '../../data/sermons';
@@ -143,25 +145,26 @@ export default function HomePage() {
       {/* Find us */}
       <section aria-labelledby="find-us-heading">
         <SectionHeader title={t('home.findUs.title')} />
-        <Card padding="md" className="flex items-start gap-4">
-          <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-burgundy/10 text-burgundy">
-            <MapPin size={18} aria-hidden="true" />
+        <div className="space-y-4">
+          <Card padding="md" className="flex items-start gap-4">
+            <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-burgundy/10 text-burgundy">
+              <MapPin size={18} aria-hidden="true" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-charcoal">
+                Bethesda Evangelical Church · House of Grace
+              </p>
+              <p className="text-sm text-charcoal/70 mt-0.5">{CHURCH_ADDRESS}</p>
+            </div>
+          </Card>
+          <ChurchMap />
+          <div>
+            <h3 className="text-sm font-semibold text-charcoal mb-2">
+              {t('home.findUs.directionsHeading')}
+            </h3>
+            <Directions />
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-medium text-charcoal">Bethesda Evangelical Church · House of Grace</p>
-            <p className="text-sm text-charcoal/70 mt-0.5">{CHURCH_ADDRESS}</p>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `Bethesda Evangelical Church ${CHURCH_ADDRESS}`,
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center text-sm font-medium text-burgundy hover:underline"
-            >
-              {t('home.findUs.directionsLabel')} →
-            </a>
-          </div>
-        </Card>
+        </div>
       </section>
     </div>
   );

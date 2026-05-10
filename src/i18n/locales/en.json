@@ -48,7 +48,11 @@
     },
     "findUs": {
       "title": "Find us",
-      "directionsLabel": "Get directions"
+      "directionsHeading": "Get directions",
+      "driving": "Driving",
+      "walking": "Walking",
+      "fromHbf": "From Osnabrück Hbf",
+      "transit": "Public transport"
     }
   },
   "assistant": {

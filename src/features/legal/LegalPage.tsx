@@ -194,6 +194,16 @@ function Datenschutz() {
           eine externe API statt.
         </p>
       </Section>
+      <Section heading="6a. Karte und Routenplanung">
+        <p>
+          Die Standortkarte auf der Startseite wird mit der Open-Source-Bibliothek Leaflet
+          dargestellt. Die Kartenkacheln werden direkt von den Servern der OpenStreetMap Foundation
+          (openstreetmap.org) geladen; dabei wird die IP-Adresse des Endgeräts übermittelt. Die
+          Schaltflächen für die Routenplanung öffnen Google Maps bzw. Apple Maps in einem neuen
+          Fenster — ab dem Moment des Aufrufs gelten die jeweiligen Datenschutzbestimmungen dieser
+          Anbieter. Es werden von uns keine Standortdaten erfasst oder an Dritte weitergegeben.
+        </p>
+      </Section>
       <Section heading="7. Cookies, LocalStorage und Tracking">
         <p>
           Bethesda Grace Hub verwendet keine Cookies und kein Tracking/Analytics. Es findet keine

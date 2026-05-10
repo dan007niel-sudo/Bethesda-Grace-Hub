@@ -25,6 +25,7 @@ type RecurringPattern = {
 };
 
 export const CHURCH_ADDRESS = 'Langestr. 19A, 49080 Osnabrück';
+export const CHURCH_COORDS = { lat: 52.269365, lng: 8.0397792 };
 
 const patterns: RecurringPattern[] = [
   {
