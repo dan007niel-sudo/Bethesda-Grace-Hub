@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Bethesda Grace Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A digital home for grace, growth, and service — the web app / PWA for **Bethesda Evangelical Church · House of Grace**.
 
-Currently, two official plugins are available:
+> "For all have sinned, and come short of the glory of God; being justified freely by his grace through the redemption that is in Christ Jesus."
+> Romans 3:23–24
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Status
 
-## React Compiler
+MVP foundation. Static / mock data only — no backend, no auth, no real assistant.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- Vite + React 18 + TypeScript
+- Tailwind CSS (design tokens: burgundy / gold / cream / charcoal)
+- React Router v6
+- react-i18next (single `en.json`, German planned)
+- vite-plugin-pwa (installable, app-shell service worker)
+- lucide-react
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Develop
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev          # http://localhost:5173
+npm run build        # type-check + production build (regenerates icons)
+npm run preview      # preview built app + PWA install prompt
+npm run icons        # regenerate PWA icons from scripts/generate-icons.mjs
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Layout
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+  app/          App shell + router
+  components/   Reusable UI (Button, Card, Modal, FormField, …)
+  data/         Mock data with async loaders (getSermons, …)
+  features/     Page-level feature folders
+  i18n/         react-i18next setup + locales/en.json
+  styles/       Design tokens + global CSS
+public/         PWA icons + favicon
+scripts/        Build-time icon generator (sharp)
+```
+
+## Notes
+
+- All user-facing copy lives in `src/i18n/locales/en.json` — no hard-coded strings in components.
+- Data is fetched through small async getters so the loaders can be swapped to Supabase later without touching pages.
+- The Grace Assistant is a constrained preview: only the four suggested prompts work; the free-text input is intentionally disabled.
+- The Prayer form opens the user's mail client (`mailto:`) on submit — no fake success state.
+- The Admin Preview is read-only — no create / edit / delete in the MVP.
