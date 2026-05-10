@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PRIMARY_NAV } from './Navigation';
 import { Wordmark } from './Wordmark';
+import { Logo } from './Logo';
 
 export function Sidebar() {
   const { t } = useTranslation();
@@ -11,7 +12,8 @@ export function Sidebar() {
       aria-label={t('common.appName')}
     >
       <div className="px-6 py-6 border-b border-soft-border">
-        <NavLink to="/" className="inline-flex">
+        <NavLink to="/" className="inline-flex items-center gap-2.5">
+          <Logo size={36} decorative />
           <Wordmark size="md" />
         </NavLink>
       </div>

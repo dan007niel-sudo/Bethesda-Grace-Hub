@@ -6,6 +6,7 @@ import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { EmptyState } from '../../components/EmptyState';
 import { Wordmark } from '../../components/Wordmark';
+import { Logo } from '../../components/Logo';
 import { EventItem } from '../../components/EventItem';
 import { AnnouncementItem } from '../../components/AnnouncementItem';
 import { getEvents, type ChurchEvent } from '../../data/events';
@@ -69,6 +70,7 @@ export default function HomePage() {
     <div className="py-8 lg:py-12 space-y-12">
       {/* Hero */}
       <section className="text-center max-w-2xl mx-auto">
+        <Logo size={128} className="mx-auto mb-4" decorative />
         <Wordmark size="lg" />
         <p className="mt-3 text-charcoal/70">{t('home.heroIntro')}</p>
         <blockquote className="mt-8 verse text-burgundy/85 text-lg leading-relaxed px-2">

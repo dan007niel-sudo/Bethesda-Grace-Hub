@@ -1,51 +1,61 @@
-// Generates placeholder PWA icons: burgundy square with gold "BGH" wordmark.
-// Maskable icon keeps the wordmark inside the inner 80% safe zone.
-import { writeFile, mkdir } from 'node:fs/promises';
+// Generates PWA icons from the source church logo.
+// - icon-192.png / icon-512.png: logo on cream background (purpose: any)
+// - icon-maskable-512.png: logo padded to ~70% (purpose: maskable safe zone)
+// - apple-touch-icon.png: 180×180 logo on cream
+// - logo.png: high-res copy used by the hero on the home page
+// - favicon.png: 64×64 raster favicon (the logo is too detailed for a clean SVG)
+import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const BURGUNDY = '#8B1E24';
-const GOLD = '#D8B76A';
 const PUBLIC_DIR = path.resolve(process.cwd(), 'public');
+const SOURCE = path.join(PUBLIC_DIR, 'logo-source.jpg');
+const CREAM = { r: 248, g: 243, b: 232, alpha: 1 };
 
-const standardSvg = (size) => `
-<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <rect width="${size}" height="${size}" fill="${BURGUNDY}"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-    font-family="Inter, system-ui, sans-serif" font-weight="700"
-    font-size="${size * 0.32}" fill="${GOLD}" letter-spacing="${size * 0.01}">
-    BGH
-  </text>
-</svg>
-`;
-
-const maskableSvg = (size) => `
-<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <rect width="${size}" height="${size}" fill="${BURGUNDY}"/>
-  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-    font-family="Inter, system-ui, sans-serif" font-weight="700"
-    font-size="${size * 0.22}" fill="${GOLD}" letter-spacing="${size * 0.008}">
-    BGH
-  </text>
-</svg>
-`;
-
-async function render(svg, outPath) {
-  const buf = Buffer.from(svg);
-  await sharp(buf).png().toFile(outPath);
-  console.log('  wrote', path.relative(process.cwd(), outPath));
+async function makeIcon({ size, padding = 0, out, background = CREAM }) {
+  const inner = Math.round(size * (1 - padding * 2));
+  const offset = Math.round((size - inner) / 2);
+  const logo = await sharp(SOURCE).resize(inner, inner, { fit: 'contain' }).toBuffer();
+  await sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background,
+    },
+  })
+    .composite([{ input: logo, top: offset, left: offset }])
+    .png()
+    .toFile(out);
+  console.log('  wrote', path.relative(process.cwd(), out));
 }
 
 async function main() {
   await mkdir(PUBLIC_DIR, { recursive: true });
-  await render(standardSvg(192), path.join(PUBLIC_DIR, 'icon-192.png'));
-  await render(standardSvg(512), path.join(PUBLIC_DIR, 'icon-512.png'));
-  await render(maskableSvg(512), path.join(PUBLIC_DIR, 'icon-maskable-512.png'));
+
+  // PWA "any" icons — logo on cream
+  await makeIcon({ size: 192, out: path.join(PUBLIC_DIR, 'icon-192.png') });
+  await makeIcon({ size: 512, out: path.join(PUBLIC_DIR, 'icon-512.png') });
+
+  // Maskable: logo at 70% so it stays inside the OS safe area
+  await makeIcon({
+    size: 512,
+    padding: 0.15,
+    out: path.join(PUBLIC_DIR, 'icon-maskable-512.png'),
+  });
+
   // Apple touch icon
-  await render(standardSvg(180), path.join(PUBLIC_DIR, 'apple-touch-icon.png'));
-  // Favicon SVG (kept as SVG for crisp rendering)
-  await writeFile(path.join(PUBLIC_DIR, 'favicon.svg'), standardSvg(64).trim());
-  console.log('  wrote public/favicon.svg');
+  await makeIcon({ size: 180, out: path.join(PUBLIC_DIR, 'apple-touch-icon.png') });
+
+  // High-res hero logo (transparent background so it sits naturally on cream)
+  await sharp(SOURCE)
+    .resize(512, 512, { fit: 'contain' })
+    .png()
+    .toFile(path.join(PUBLIC_DIR, 'logo.png'));
+  console.log('  wrote public/logo.png');
+
+  // Favicon
+  await makeIcon({ size: 64, out: path.join(PUBLIC_DIR, 'favicon.png') });
 }
 
 main().catch((err) => {

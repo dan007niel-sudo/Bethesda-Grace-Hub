@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { BottomNav } from './BottomNav';
 import { Sidebar } from './Sidebar';
 import { Wordmark } from './Wordmark';
+import { Logo } from './Logo';
 
 export function AppShell() {
   const { t } = useTranslation();
@@ -15,7 +16,8 @@ export function AppShell() {
       <div className="flex-1 flex flex-col min-w-0">
         <header className="lg:hidden sticky top-0 z-20 border-b border-soft-border bg-cream/90 backdrop-blur">
           <div className="px-4 h-14 flex items-center">
-            <NavLink to="/" className="inline-flex">
+            <NavLink to="/" className="inline-flex items-center gap-2">
+              <Logo size={28} decorative />
               <Wordmark size="md" />
             </NavLink>
           </div>
