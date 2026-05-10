@@ -1,3 +1,5 @@
+import { getWeeklySchedule } from './events';
+
 export type AdminSection = {
   id: 'events' | 'sermons' | 'announcements' | 'ministries' | 'prayer-requests';
   title: string;
@@ -6,20 +8,21 @@ export type AdminSection = {
   rows: string[][];
 };
 
+const eventRows: string[][] = getWeeklySchedule().map((s) => [
+  s.weekday,
+  s.time,
+  s.title,
+  s.location,
+  'Active',
+]);
+
 const sections: AdminSection[] = [
   {
     id: 'events',
     title: 'Manage Events',
-    description: 'Read-only preview of the upcoming events list.',
-    columns: ['Title', 'Date', 'Location', 'Status'],
-    rows: [
-      ['Sunday Service', '2026-05-17', 'Main Sanctuary', 'Published'],
-      ['Evening of Prayer', '2026-05-21', 'Chapel', 'Published'],
-      ['Newcomers Lunch', '2026-05-24', 'Fellowship Hall', 'Published'],
-      ['Baptism Service', '2026-06-07', 'Main Sanctuary', 'Draft'],
-      ['Youth Retreat Planning', '2026-06-14', 'Off-site', 'Draft'],
-      ['Members Meeting', '2026-06-21', 'Main Sanctuary', 'Scheduled'],
-    ],
+    description: 'Read-only preview of the recurring weekly schedule.',
+    columns: ['Day', 'Time', 'Event', 'Location', 'Status'],
+    rows: eventRows,
   },
   {
     id: 'sermons',

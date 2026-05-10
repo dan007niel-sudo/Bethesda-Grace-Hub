@@ -32,7 +32,7 @@ export default function HomePage() {
         getAnnouncements(),
         getSermons(),
       ]);
-      setEvents(evs.slice(0, 3));
+      setEvents(evs.slice(0, 5));
       setAnnouncements(anns.slice(0, 3));
       setLatestSermonId(sermons[0]?.id ?? null);
     })();
