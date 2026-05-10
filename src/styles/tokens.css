@@ -1,0 +1,32 @@
+:root {
+  /* Color tokens */
+  --color-burgundy: #8b1e24;
+  --color-gold: #d8b76a;
+  --color-cream: #f8f3e8;
+  --color-white: #ffffff;
+  --color-charcoal: #241f1f;
+  --color-soft-border: #e7dcc8;
+
+  /* Semantic */
+  --color-bg: var(--color-cream);
+  --color-surface: var(--color-white);
+  --color-text: var(--color-charcoal);
+  --color-text-muted: #5b5757;
+  --color-primary: var(--color-burgundy);
+  --color-accent: var(--color-gold);
+  --color-border: var(--color-soft-border);
+
+  /* Typography */
+  --font-ui: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-serif: 'Crimson Pro', Georgia, serif;
+
+  /* Radii */
+  --radius-card: 1rem;
+  --radius-sm: 0.5rem;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgba(36, 31, 31, 0.04), 0 4px 12px rgba(36, 31, 31, 0.06);
+
+  /* Layout */
+  --max-width-content: 64rem;
+}
