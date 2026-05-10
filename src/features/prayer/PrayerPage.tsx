@@ -8,7 +8,7 @@ import { PreviewNotice } from '../../components/PreviewNotice';
 import { FormField, FormGroup } from '../../components/FormField';
 import { Button } from '../../components/Button';
 
-const PRAYER_EMAIL = 'prayer@bethesdagracehub.example';
+const PRAYER_EMAIL = 'besthesdahouseofgrace1010@gmail.com';
 
 type Visibility = 'private' | 'shared';
 
