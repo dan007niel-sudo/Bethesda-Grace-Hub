@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "icons": "node scripts/generate-icons.mjs",
+    "knowledge:sync": "node scripts/sync-knowledge.mjs",
     "build": "tsc -b && vite build",
-    "prebuild": "node scripts/generate-icons.mjs",
+    "prebuild": "node scripts/generate-icons.mjs && node scripts/sync-knowledge.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
