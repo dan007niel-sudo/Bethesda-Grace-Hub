@@ -39,7 +39,9 @@
     "events": {
       "title": "Upcoming events",
       "description": "What's happening in the next few weeks",
-      "empty": "No events on the calendar yet — check back soon."
+      "empty": "No events on the calendar yet — check back soon.",
+      "joinZoom": "Join via Zoom",
+      "passcode": "Passcode"
     },
     "announcements": {
       "title": "Announcements",

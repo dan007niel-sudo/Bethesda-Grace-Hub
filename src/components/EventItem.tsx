@@ -1,4 +1,5 @@
-import { Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin, Video } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import type { ChurchEvent } from '../data/events';
 
 const dateFmt = new Intl.DateTimeFormat('en-US', {
@@ -14,6 +15,7 @@ const timeFmt = new Intl.DateTimeFormat('en-US', {
 const monthAbbrFmt = new Intl.DateTimeFormat('en-US', { month: 'short' });
 
 export function EventItem({ event }: { event: ChurchEvent }) {
+  const { t } = useTranslation();
   const start = new Date(event.date);
   const end = event.endDate ? new Date(event.endDate) : null;
   const timeRange = end ? `${timeFmt.format(start)}–${timeFmt.format(end)}` : timeFmt.format(start);
@@ -38,6 +40,25 @@ export function EventItem({ event }: { event: ChurchEvent }) {
             {event.location}
           </span>
         </div>
+        {event.zoomUrl ? (
+          <div className="mt-3 flex flex-wrap items-center gap-3 text-xs">
+            <a
+              href={event.zoomUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-burgundy text-white hover:bg-burgundy/90 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy/40"
+            >
+              <Video size={14} aria-hidden="true" />
+              {t('home.events.joinZoom')}
+            </a>
+            {event.meetingCode ? (
+              <span className="text-charcoal/70">
+                {t('home.events.passcode')}:{' '}
+                <span className="font-mono font-medium text-charcoal">{event.meetingCode}</span>
+              </span>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </article>
   );

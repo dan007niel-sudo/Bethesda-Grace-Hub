@@ -5,7 +5,12 @@ export type ChurchEvent = {
   endDate?: string; // ISO datetime — end (optional)
   location: string;
   summary: string;
+  zoomUrl?: string;
+  meetingCode?: string;
 };
+
+export const ZOOM_URL = 'https://us04web.zoom.us/j/7532078373';
+export const ZOOM_PASSCODE = '497658';
 
 type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6; // 0 = Sunday
 
@@ -22,6 +27,7 @@ type RecurringPattern = {
   location: string;
   summary: string;
   frequency?: Frequency;
+  zoom?: boolean;
 };
 
 export const CHURCH_ADDRESS = 'Langestr. 19A, 49080 Osnabrück';
@@ -38,6 +44,7 @@ const patterns: RecurringPattern[] = [
     endMinute: 30,
     location: 'Online (Zoom)',
     summary: 'Weekly youth prayer gathering — open to all young people of the church.',
+    zoom: true,
   },
   {
     id: 'bible-class',
@@ -71,6 +78,7 @@ const patterns: RecurringPattern[] = [
     endMinute: 30,
     location: 'Online (Zoom)',
     summary: 'Friday evening prayer — joining online from wherever you are.',
+    zoom: true,
   },
   {
     id: 'youth-service',
@@ -169,6 +177,8 @@ function buildUpcoming(count: number, from: Date = new Date()): ChurchEvent[] {
         endDate: isoLocal(end),
         location: p.location,
         summary: p.summary,
+        zoomUrl: p.zoom ? ZOOM_URL : undefined,
+        meetingCode: p.zoom ? ZOOM_PASSCODE : undefined,
       };
     })
     .sort((a, b) => a.date.localeCompare(b.date))
