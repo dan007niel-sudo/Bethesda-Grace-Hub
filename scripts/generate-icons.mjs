@@ -59,11 +59,23 @@ async function makeTransparent({ size, out }) {
 async function main() {
   await mkdir(PUBLIC_DIR, { recursive: true });
 
-  await makeIconOnBackground({ size: 192, out: path.join(PUBLIC_DIR, 'icon-192.png') });
-  await makeIconOnBackground({ size: 512, out: path.join(PUBLIC_DIR, 'icon-512.png') });
+  // PWA "any" icons — burgundy fill with the logo at ~78% so it reads well
+  // when the OS or browser displays them at small sizes.
+  await makeIconOnBackground({
+    size: 192,
+    padding: 0.11,
+    out: path.join(PUBLIC_DIR, 'icon-192.png'),
+    background: BURGUNDY,
+  });
+  await makeIconOnBackground({
+    size: 512,
+    padding: 0.11,
+    out: path.join(PUBLIC_DIR, 'icon-512.png'),
+    background: BURGUNDY,
+  });
 
-  // Maskable: burgundy fill so the OS-applied square mask still looks on-brand,
-  // logo at 70% to stay inside the platform safe area.
+  // Maskable — bigger safe zone (logo at 70%) because Android can crop
+  // anywhere within the inner 80% circle.
   await makeIconOnBackground({
     size: 512,
     padding: 0.15,
@@ -71,11 +83,19 @@ async function main() {
     background: BURGUNDY,
   });
 
-  await makeIconOnBackground({ size: 180, out: path.join(PUBLIC_DIR, 'apple-touch-icon.png') });
+  // Apple touch icon — iOS auto-rounds the corners (~22% radius) but applies
+  // no inner crop, so the logo can sit a touch larger.
+  await makeIconOnBackground({
+    size: 180,
+    padding: 0.09,
+    out: path.join(PUBLIC_DIR, 'apple-touch-icon.png'),
+    background: BURGUNDY,
+  });
 
   // Hero / in-app logo: transparent background so it sits naturally on cream.
   await makeTransparent({ size: 512, out: path.join(PUBLIC_DIR, 'logo.png') });
 
+  // Favicon stays on cream — it sits next to the URL bar, not the home screen.
   await makeIconOnBackground({ size: 64, out: path.join(PUBLIC_DIR, 'favicon.png') });
 }
 
