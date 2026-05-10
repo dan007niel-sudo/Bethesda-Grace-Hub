@@ -40,12 +40,12 @@ export function Sidebar() {
           ))}
         </ul>
       </nav>
-      <div className="p-4 border-t border-soft-border">
-        <NavLink
-          to="/admin-preview"
-          className="text-xs text-charcoal/70 hover:text-burgundy"
-        >
+      <div className="p-4 border-t border-soft-border flex items-center gap-4 text-xs text-charcoal/70">
+        <NavLink to="/admin-preview" className="hover:text-burgundy">
           {t('nav.adminPreview')}
+        </NavLink>
+        <NavLink to="/legal" className="hover:text-burgundy">
+          {t('legal.footerLink')}
         </NavLink>
       </div>
     </aside>

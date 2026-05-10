@@ -29,9 +29,12 @@ export function AppShell() {
         >
           <Outlet />
         </main>
-        <footer className="lg:hidden text-center text-xs text-charcoal/70 pb-20">
+        <footer className="lg:hidden text-center text-xs text-charcoal/70 pb-20 flex justify-center gap-4">
           <NavLink to="/admin-preview" className="hover:text-burgundy">
             {t('nav.adminPreview')}
+          </NavLink>
+          <NavLink to="/legal" className="hover:text-burgundy">
+            {t('legal.footerLink')}
           </NavLink>
         </footer>
       </div>

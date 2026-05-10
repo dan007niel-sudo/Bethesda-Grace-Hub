@@ -124,6 +124,12 @@
     "notFound": "We couldn't find this step.",
     "empty": "Your journey will be ready here soon."
   },
+  "legal": {
+    "title": "Legal",
+    "subtitle": "Impressum, Datenschutzerklärung und AVV (in German, as legally required).",
+    "footerLink": "Legal",
+    "backHome": "Back to Home"
+  },
   "admin": {
     "title": "Admin Preview",
     "helper": "This preview shows the future content management area. Authentication, permissions, and editing capabilities will be added when the backend is connected.",

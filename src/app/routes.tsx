@@ -12,6 +12,7 @@ import JourneyStepPage from '../features/journey/JourneyStepPage';
 import AdminPreviewPage from '../features/admin/AdminPreviewPage';
 import AdminSectionPage from '../features/admin/AdminSectionPage';
 import ComponentShowcasePage from '../features/dev/ComponentShowcasePage';
+import LegalPage from '../features/legal/LegalPage';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,8 @@ export const router = createBrowserRouter([
       { path: '/admin-preview', element: <AdminPreviewPage /> },
       { path: '/admin-preview/:section', element: <AdminSectionPage /> },
       { path: '/dev/components', element: <ComponentShowcasePage /> },
+      { path: '/legal', element: <LegalPage /> },
+      { path: '/legal/:doc', element: <LegalPage /> },
     ],
   },
 ]);
