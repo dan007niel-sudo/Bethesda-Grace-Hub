@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Headphones, Play, FileText, MessageCircle } from 'lucide-react';
 import { Button } from '../../components/Button';
@@ -19,6 +19,7 @@ const dateFmt = new Intl.DateTimeFormat('en-US', {
 export default function SermonDetailPage() {
   const { id } = useParams();
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [sermon, setSermon] = useState<Sermon | null | undefined>(undefined);
   const [mediaOpen, setMediaOpen] = useState(false);
 
@@ -94,17 +95,26 @@ export default function SermonDetailPage() {
           <FileText size={16} aria-hidden="true" />
           {t('sermons.viewNotes')}
         </Button>
-        <span className="inline-block">
-          <Button
-            variant="ghost"
-            disabled
-            aria-disabled="true"
-            title={t('sermons.askDisabledTooltip')}
-          >
-            <MessageCircle size={16} aria-hidden="true" />
-            {t('sermons.ask')}
-          </Button>
-        </span>
+        <Button
+          variant="secondary"
+          onClick={() =>
+            navigate('/assistant', {
+              state: {
+                sermonContext: {
+                  id: sermon.id,
+                  title: sermon.title,
+                  speaker: sermon.speaker,
+                  scripture: sermon.scripture,
+                  date: sermon.date,
+                  notes: sermon.notes,
+                },
+              },
+            })
+          }
+        >
+          <MessageCircle size={16} aria-hidden="true" />
+          {t('sermons.ask')}
+        </Button>
       </div>
 
       {/* Notes */}

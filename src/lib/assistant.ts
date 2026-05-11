@@ -15,6 +15,7 @@ export const isAssistantConfigured = Boolean(ENDPOINT);
 export async function askGraceAssistant(
   message: string,
   history: AssistantTurn[],
+  context?: string,
 ): Promise<string> {
   if (!ENDPOINT) {
     throw new Error('AI endpoint not configured');
@@ -27,7 +28,7 @@ export async function askGraceAssistant(
   const r = await fetch(ENDPOINT, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ message, history, ...(context ? { context } : {}) }),
   });
   if (!r.ok) {
     const txt = await r.text().catch(() => '');

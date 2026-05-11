@@ -61,6 +61,7 @@
     "title": "Grace Assistant",
     "description": "A gentle guide grounded in our church's teaching.",
     "intro": "Hello — I'm the Grace Assistant. Ask me anything about Bethesda House of Grace — service times, ministries, what we believe — or open up a Bible question. Tap a suggestion or type your own.",
+    "sermonIntro": "We're looking at \"{{title}}\" by {{speaker}}. Ask me anything about this sermon — the passage, the main idea, or how it applies to your week.",
     "suggestionsHeading": "Suggested questions",
     "inputPlaceholder": "Ask the Grace Assistant…",
     "inputPlaceholderDisabled": "Free questions will be available once the assistant is connected.",

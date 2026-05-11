@@ -1,6 +1,10 @@
 // Supabase Edge Function: Grace Assistant
 // Endpoint: POST {SUPABASE_URL}/functions/v1/chat
-// Body: { message: string, history?: { role: 'user' | 'model', text: string }[] }
+// Body: {
+//   message: string,
+//   history?: { role: 'user' | 'model', text: string }[],
+//   context?: string  // optional per-request context (e.g. sermon notes) appended to the system prompt for this turn only; max 4000 chars
+// }
 // Response: { text: string } | { error: string }
 //
 // Deploy:
@@ -66,7 +70,7 @@ serve(async (req) => {
     return json({ error: 'Server is not configured' }, 500);
   }
 
-  let body: { message?: unknown; history?: unknown };
+  let body: { message?: unknown; history?: unknown; context?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -76,6 +80,12 @@ serve(async (req) => {
   const message = typeof body.message === 'string' ? body.message.trim() : '';
   if (!message) return json({ error: "Missing 'message'" }, 400);
   if (message.length > 2000) return json({ error: 'Message too long' }, 400);
+
+  const context =
+    typeof body.context === 'string' ? body.context.trim().slice(0, 4000) : '';
+  const systemPrompt = context
+    ? `${SYSTEM_PROMPT}\n---\n\nConversation context (only relevant for this turn — the user is reading this content right now):\n\n${context}\n`
+    : SYSTEM_PROMPT;
 
   const history: ChatTurn[] = Array.isArray(body.history)
     ? (body.history as unknown[])
@@ -103,7 +113,7 @@ serve(async (req) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+          system_instruction: { parts: [{ text: systemPrompt }] },
           contents,
           generationConfig: {
             temperature: 0.5,
