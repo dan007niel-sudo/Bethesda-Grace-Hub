@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
 import { Sparkles, User, Send } from 'lucide-react';
 import { SectionHeader } from '../../components/SectionHeader';
 import { PreviewNotice } from '../../components/PreviewNotice';
@@ -15,20 +14,8 @@ import {
 
 type DisplayTurn = { role: 'user' | 'assistant'; text: string };
 
-type SermonContext = {
-  id: string;
-  title: string;
-  speaker: string;
-  scripture: string;
-  date: string;
-  notes: string;
-};
-
 export default function AssistantPage() {
   const { t } = useTranslation();
-  const location = useLocation();
-  const sermonContext =
-    (location.state as { sermonContext?: SermonContext } | null)?.sermonContext ?? null;
   const [prompts, setPrompts] = useState<AssistantPrompt[] | null>(null);
   const [used, setUsed] = useState<Set<string>>(new Set());
   const [turns, setTurns] = useState<DisplayTurn[]>([]);
@@ -42,14 +29,6 @@ export default function AssistantPage() {
       setPrompts(await getAssistantPrompts());
     })();
   }, []);
-
-  // Reset conversation state when the sermon-context identity changes.
-  useEffect(() => {
-    setTurns([]);
-    setUsed(new Set());
-    setError(null);
-    setInput('');
-  }, [sermonContext?.id ?? null]);
 
   // Scroll to the latest turn after it's added.
   useEffect(() => {
@@ -84,12 +63,8 @@ export default function AssistantPage() {
       text: tn.text,
     }));
 
-    const contextString = sermonContext
-      ? `Sermon: "${sermonContext.title}"\nSpeaker: ${sermonContext.speaker}\nScripture: ${sermonContext.scripture}\nDate: ${sermonContext.date}\n\nNotes:\n${sermonContext.notes}`
-      : undefined;
-
     try {
-      const reply = await askGraceAssistant(message, history, contextString);
+      const reply = await askGraceAssistant(message, history);
       setTurns((prev) => [...prev, { role: 'assistant', text: reply }]);
     } catch (e) {
       console.error(e);
@@ -132,12 +107,7 @@ export default function AssistantPage() {
         aria-label={t('assistant.title')}
       >
         <Turn role="assistant" label={t('assistant.assistantLabel')}>
-          {sermonContext
-            ? t('assistant.sermonIntro', {
-                title: sermonContext.title,
-                speaker: sermonContext.speaker,
-              })
-            : t('assistant.intro')}
+          {t('assistant.intro')}
         </Turn>
 
         {turns.map((turn, i) => (
@@ -170,7 +140,7 @@ export default function AssistantPage() {
       </div>
 
       {/* Suggested prompts */}
-      {!sermonContext && remainingPrompts.length > 0 ? (
+      {remainingPrompts.length > 0 ? (
         <section className="mt-6" aria-labelledby="assistant-suggestions-heading">
           <h2
             id="assistant-suggestions-heading"

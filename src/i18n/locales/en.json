@@ -12,11 +12,9 @@
   },
   "nav": {
     "home": "Home",
-    "assistant": "Assistant",
-    "sermons": "Sermons",
-    "ministries": "Ministries",
-    "prayer": "Prayer",
-    "journey": "Journey",
+    "ask": "Ask",
+    "pray": "Pray",
+    "connect": "Connect",
     "adminPreview": "Admin Preview"
   },
   "home": {
@@ -24,17 +22,15 @@
     "heroIntro": "A digital home for grace, growth, and service.",
     "scriptureVerse": "For all have sinned, and come short of the glory of God; being justified freely by his grace through the redemption that is in Christ Jesus.",
     "scriptureRef": "Romans 3:23–24",
-    "welcome": "Wherever you are on the journey, you are welcome here. This is a place to find sermons, ministries, prayer support, and a clear next step.",
+    "welcome": "Wherever you are on the journey, you are welcome here. This is a place to find prayer support, the church's daily rhythm, and a clear next step.",
     "quickActions": {
       "title": "Where would you like to begin?",
       "askAssistant": "Ask the Grace Assistant",
       "askAssistantSub": "Quick answers about the church",
-      "latestSermon": "Listen to the latest sermon",
-      "latestSermonSub": "This Sunday's teaching",
       "prayerRequest": "Send a prayer request",
       "prayerRequestSub": "We pray with you",
-      "joinMinistry": "Join a ministry",
-      "joinMinistrySub": "Find your place to serve"
+      "connect": "Connect with the church",
+      "connectSub": "Reach a pastor and see what's next"
     },
     "events": {
       "title": "Upcoming events",
@@ -61,7 +57,6 @@
     "title": "Grace Assistant",
     "description": "A gentle guide grounded in our church's teaching.",
     "intro": "Hello — I'm the Grace Assistant. Ask me anything about Bethesda House of Grace — service times, ministries, what we believe — or open up a Bible question. Tap a suggestion or type your own.",
-    "sermonIntro": "We're looking at \"{{title}}\" by {{speaker}}. Ask me anything about this sermon — the passage, the main idea, or how it applies to your week.",
     "suggestionsHeading": "Suggested questions",
     "inputPlaceholder": "Ask the Grace Assistant…",
     "inputPlaceholderDisabled": "Free questions will be available once the assistant is connected.",
@@ -72,39 +67,6 @@
     "pastoralNote": "The assistant is here to guide and encourage. It does not replace pastoral care, church leadership, or professional support in urgent situations.",
     "youLabel": "You",
     "assistantLabel": "Grace Assistant"
-  },
-  "sermons": {
-    "title": "Sermons",
-    "description": "Recent teaching from the Bethesda pulpit.",
-    "searchPlaceholder": "Search sermons (coming soon)",
-    "filterAll": "All",
-    "listen": "Listen",
-    "watch": "Watch",
-    "viewNotes": "View notes",
-    "ask": "Ask about this sermon",
-    "askDisabledTooltip": "Available once the assistant supports free questions.",
-    "speaker": "Speaker",
-    "date": "Date",
-    "scripture": "Scripture",
-    "summary": "Summary",
-    "notesHeading": "Sermon notes",
-    "empty": "No sermons in the archive yet — check back after the next Sunday.",
-    "notFound": "We couldn't find this sermon.",
-    "backToSermons": "Back to all sermons",
-    "media": {
-      "modalTitle": "Sermon media",
-      "modalBody": "Sermon media will be available once the church media library is connected.",
-      "modalClose": "Close"
-    }
-  },
-  "ministries": {
-    "title": "Ministries",
-    "description": "Find your place to serve the church and the city.",
-    "timeCommitmentHeading": "Time commitment",
-    "contactHeading": "Get in touch",
-    "backToMinistries": "Back to all ministries",
-    "notFound": "We couldn't find this ministry.",
-    "empty": "Ministries will appear here as teams are formed."
   },
   "prayer": {
     "title": "Prayer",
@@ -131,13 +93,26 @@
     "mailtoNote": "In this preview version, prayer requests are sent through your email app. A secure in-app submission system will be added when the church backend is connected.",
     "subjectPrefix": "Prayer request"
   },
-  "journey": {
-    "title": "My Journey",
-    "description": "Wherever you are, there is a next step. Start where it feels right.",
-    "guidanceHeading": "What this looks like",
-    "backToJourney": "Back to My Journey",
-    "notFound": "We couldn't find this step.",
-    "empty": "Your journey will be ready here soon."
+  "connect": {
+    "title": "Connect",
+    "description": "A space to reach the church between Sundays — soon with personal tools, today with a direct line to the pastoral team.",
+    "comingSoonBadge": "Connect is still being built. The features below are on the way; until then, please reach out directly.",
+    "roadmapHeading": "What's coming",
+    "roadmapItems": [
+      "Member sign-in with your own profile",
+      "A private prayer journal that travels with you",
+      "Sign-ups for connect groups and serving teams",
+      "Gentle push notifications for prayer and announcements"
+    ],
+    "contactHeading": "Reach Pastor Stephen Essah",
+    "contactBody": "Until in-app messaging is ready, the surest way to connect is by email — or in person after the Sunday service. We read every message and reply with care.",
+    "addressHeading": "Where and when",
+    "serviceTime": "Sunday Service at 13:30"
+  },
+  "notFound": {
+    "title": "This page has moved on",
+    "description": "We couldn't find what you were looking for. The page may have been retired as the app evolved.",
+    "backHome": "Back to Home"
   },
   "legal": {
     "title": "Legal",

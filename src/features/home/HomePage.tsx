@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, BookOpen, HandHeart, HeartHandshake, MapPin } from 'lucide-react';
+import { Sparkles, HandHeart, UsersRound, MapPin } from 'lucide-react';
 import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { EmptyState } from '../../components/EmptyState';
@@ -13,7 +13,6 @@ import { ChurchMap } from '../../components/ChurchMap';
 import { Directions } from '../../components/Directions';
 import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
-import { getSermons } from '../../data/sermons';
 
 type QuickActionDef = {
   to: string;
@@ -26,18 +25,12 @@ export default function HomePage() {
   const { t } = useTranslation();
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-  const [latestSermonId, setLatestSermonId] = useState<string | null>(null);
 
   useEffect(() => {
     void (async () => {
-      const [evs, anns, sermons] = await Promise.all([
-        getEvents(),
-        getAnnouncements(),
-        getSermons(),
-      ]);
+      const [evs, anns] = await Promise.all([getEvents(), getAnnouncements()]);
       setEvents(evs.slice(0, 6));
       setAnnouncements(anns.slice(0, 3));
-      setLatestSermonId(sermons[0]?.id ?? null);
     })();
   }, []);
 
@@ -49,22 +42,16 @@ export default function HomePage() {
       subKey: 'home.quickActions.askAssistantSub',
     },
     {
-      to: latestSermonId ? `/sermons/${latestSermonId}` : '/sermons',
-      icon: BookOpen,
-      titleKey: 'home.quickActions.latestSermon',
-      subKey: 'home.quickActions.latestSermonSub',
-    },
-    {
       to: '/prayer',
       icon: HandHeart,
       titleKey: 'home.quickActions.prayerRequest',
       subKey: 'home.quickActions.prayerRequestSub',
     },
     {
-      to: '/ministries',
-      icon: HeartHandshake,
-      titleKey: 'home.quickActions.joinMinistry',
-      subKey: 'home.quickActions.joinMinistrySub',
+      to: '/connect',
+      icon: UsersRound,
+      titleKey: 'home.quickActions.connect',
+      subKey: 'home.quickActions.connectSub',
     },
   ];
 
@@ -87,7 +74,7 @@ export default function HomePage() {
         <h2 id="quick-actions-heading" className="text-xl font-semibold text-charcoal mb-4">
           {t('home.quickActions.title')}
         </h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
           {quickActions.map(({ to, icon: Icon, titleKey, subKey }) => (
             <Link
               key={titleKey}
