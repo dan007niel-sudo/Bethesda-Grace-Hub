@@ -8,12 +8,14 @@ import { EmptyState } from '../../components/EmptyState';
 import { Wordmark } from '../../components/Wordmark';
 import { Logo } from '../../components/Logo';
 import { EventItem } from '../../components/EventItem';
+import { LiveServiceBanner } from '../../components/LiveServiceBanner';
 import { AnnouncementItem } from '../../components/AnnouncementItem';
 import { ChurchMap } from '../../components/ChurchMap';
 import { Directions } from '../../components/Directions';
 import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
 import { getDevotional, type Devotional } from '../../lib/devotional';
+import { useLiveService } from '../../lib/liveService';
 
 type QuickActionDef = {
   to: string;
@@ -27,6 +29,7 @@ export default function HomePage() {
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [devotional, setDevotional] = useState<Devotional | null>(null);
+  const live = useLiveService();
 
   useEffect(() => {
     void (async () => {
@@ -133,6 +136,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Live service banner */}
+      {live ? <LiveServiceBanner state={live} /> : null}
+
       {/* Events */}
       <section aria-labelledby="events-heading">
         <SectionHeader
@@ -145,7 +151,11 @@ export default function HomePage() {
           <Card padding="sm">
             <div className="divide-y divide-soft-border">
               {events.map((e) => (
-                <EventItem key={e.id} event={e} />
+                <EventItem
+                  key={e.id}
+                  event={e}
+                  liveBadge={live?.event.id === e.id ? live.phase : undefined}
+                />
               ))}
             </div>
           </Card>

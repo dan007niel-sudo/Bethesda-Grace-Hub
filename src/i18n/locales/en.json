@@ -56,6 +56,16 @@
       "transit": "Public transport"
     }
   },
+  "events": {
+    "nowBadge": "Now",
+    "soonBadge": "Soon"
+  },
+  "live": {
+    "bannerLiveTitle": "{{title}} · live now",
+    "bannerSoonTitle": "{{title}} starts in {{minutes}} min",
+    "bannerLocation": "At {{location}}",
+    "bannerJoinZoom": "Join via Zoom"
+  },
   "assistant": {
     "title": "Grace Assistant",
     "description": "A gentle guide grounded in our church's teaching.",
