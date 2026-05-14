@@ -106,8 +106,9 @@ Server-side (Supabase function secrets, not in repo):
 - `GEMINI_MODEL` — defaults to `gemini-2.5-flash`
 
 Client-side (Render env, baked into static bundle):
-- `VITE_AI_ENDPOINT`
-- `VITE_SUPABASE_ANON_KEY`
+- `VITE_AI_ENDPOINT` — full URL of the chat Edge Function
+- `VITE_SUPABASE_URL` — `https://kpculuksmtmqtmvmcjvn.supabase.co` (used by `@supabase/supabase-js` for Auth + DB)
+- `VITE_SUPABASE_ANON_KEY` — public anon JWT (sent as `apikey` header; RLS is the gate)
 
 ## Lessons Learned
 
@@ -128,6 +129,10 @@ Bugs and footguns we've already solved. **Always add to this list** when a non-o
 - **Supabase CLI can't be installed as a global npm module** — installer rejects it. Either `brew install supabase/tap/supabase` or download the binary tarball from GitHub releases (`supabase_darwin_arm64.tar.gz`) and put it on PATH.
 - **Edge Functions deploy instantly**, no static-site rebuild needed. After `supabase functions deploy chat`, the new behavior is live within seconds. Don't wait on Render.
 - **`--no-verify-jwt` is required** for the chat function to be callable from the public app without a session. The frontend still sends the anon key in `apikey` + `Authorization` headers because Supabase's gateway expects them.
+- **Database migrations are NOT auto-applied by pushing to main.** After committing a new file under `supabase/migrations/`, you must run `~/.local/bin/supabase db push --linked --include-all` (or paste the SQL into the Dashboard → SQL Editor). Apply the migration **before** the frontend push so RLS is active before any client could insert rows.
+- **Magic-link redirect URLs must be whitelisted in the Dashboard.** Under Auth → URL Configuration, add every callback URL (`https://bethesda-grace-hub.onrender.com/auth/callback` AND `http://localhost:5173/auth/callback` for dev). Without the entry, the magic link silently 400s before reaching the SPA — user sees a generic Supabase error page, not the SPA's callback handler.
+- **`detectSessionInUrl: true` is required** in the supabase-js client config for magic-link callbacks to populate the session automatically. Without it, AuthCallbackPage spins forever.
+- **Supabase free-tier SMTP rate-limit is ~2–3 magic-link mails per hour.** Fine for organic member onboarding (one at a time), but if you announce the journal in a Sunday service and 10 people sign up at once, the later ones will get rate-limited. Mitigation: configure a custom SMTP provider (Resend, SendGrid) in Auth → SMTP Settings before any onboarding push.
 
 ### AI / knowledge base
 - **The Grace Assistant only knows what's in `src/data/knowledge.md`.** Any time it answers "I don't see X listed", the fix is to add X to knowledge.md, then sync + redeploy. Single source of truth.
