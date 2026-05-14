@@ -22,6 +22,9 @@
     "heroIntro": "A digital home for grace, growth, and service.",
     "scriptureVerse": "For all have sinned, and come short of the glory of God; being justified freely by his grace through the redemption that is in Christ Jesus.",
     "scriptureRef": "Romans 3:23–24",
+    "devotional": {
+      "todayBadge": "Today"
+    },
     "welcome": "Wherever you are on the journey, you are welcome here. This is a place to find prayer support, the church's daily rhythm, and a clear next step.",
     "quickActions": {
       "title": "Where would you like to begin?",

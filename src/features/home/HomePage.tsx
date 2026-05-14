@@ -13,6 +13,7 @@ import { ChurchMap } from '../../components/ChurchMap';
 import { Directions } from '../../components/Directions';
 import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
+import { getDevotional, type Devotional } from '../../lib/devotional';
 
 type QuickActionDef = {
   to: string;
@@ -25,6 +26,7 @@ export default function HomePage() {
   const { t } = useTranslation();
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [devotional, setDevotional] = useState<Devotional | null>(null);
 
   useEffect(() => {
     void (async () => {
@@ -33,6 +35,24 @@ export default function HomePage() {
       setAnnouncements(anns.slice(0, 3));
     })();
   }, []);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const d = await getDevotional();
+        setDevotional(d);
+      } catch (e) {
+        // Silent fallback: the static hero verse stays visible.
+        console.warn('Devotional unavailable, using static fallback:', e);
+      }
+    })();
+  }, []);
+
+  const todayLabel = new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date());
 
   const quickActions: QuickActionDef[] = [
     {
@@ -62,10 +82,32 @@ export default function HomePage() {
         <Logo size={128} className="mx-auto mb-4" decorative />
         <Wordmark size="lg" />
         <p className="mt-3 text-charcoal/70">{t('home.heroIntro')}</p>
-        <blockquote className="mt-8 verse text-burgundy/85 text-lg leading-relaxed px-2">
-          “{t('home.scriptureVerse')}”
-        </blockquote>
-        <p className="mt-2 text-sm text-charcoal/70">{t('home.scriptureRef')}</p>
+        {devotional ? (
+          <>
+            <p className="mt-8 text-xs uppercase tracking-wide text-charcoal/70">
+              <span className="inline-flex items-center rounded-full bg-burgundy/10 text-burgundy px-2 py-0.5 font-medium">
+                {t('home.devotional.todayBadge')}
+              </span>
+              <span className="ml-2 text-charcoal/70 normal-case tracking-normal">
+                {todayLabel}
+              </span>
+            </p>
+            <blockquote className="mt-4 verse text-burgundy/85 text-lg leading-relaxed px-2">
+              “{devotional.verse}”
+            </blockquote>
+            <p className="mt-2 text-sm text-charcoal/70">{devotional.reference}</p>
+            <p className="mt-4 text-charcoal/80 max-w-xl mx-auto leading-relaxed">
+              {devotional.reflection}
+            </p>
+          </>
+        ) : (
+          <>
+            <blockquote className="mt-8 verse text-burgundy/85 text-lg leading-relaxed px-2">
+              “{t('home.scriptureVerse')}”
+            </blockquote>
+            <p className="mt-2 text-sm text-charcoal/70">{t('home.scriptureRef')}</p>
+          </>
+        )}
         <p className="mt-8 text-charcoal/75 max-w-xl mx-auto">{t('home.welcome')}</p>
       </section>
 
