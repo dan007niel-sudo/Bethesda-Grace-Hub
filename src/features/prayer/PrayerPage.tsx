@@ -1,12 +1,14 @@
 import { useId, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BookHeart, Mail } from 'lucide-react';
 import { SectionHeader } from '../../components/SectionHeader';
 import { PastoralNote } from '../../components/PastoralNote';
 import { PreviewNotice } from '../../components/PreviewNotice';
 import { FormField, FormGroup } from '../../components/FormField';
 import { Button } from '../../components/Button';
+import { Card } from '../../components/Card';
 
 const PRAYER_EMAIL = 'besthesdahouseofgrace1010@gmail.com';
 
@@ -165,6 +167,28 @@ export default function PrayerPage() {
       <div className="mt-8">
         <PreviewNotice>{t('prayer.mailtoNote')}</PreviewNotice>
       </div>
+
+      <Card padding="md" className="mt-6">
+        <div className="flex items-start gap-3">
+          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-burgundy/10 text-burgundy">
+            <BookHeart size={18} aria-hidden="true" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <h2 className="text-base font-semibold text-charcoal">
+              {t('prayer.journalCtaTitle')}
+            </h2>
+            <p className="mt-1 text-sm text-charcoal/80 leading-relaxed">
+              {t('prayer.journalCtaBody')}
+            </p>
+            <Link
+              to="/journal"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-burgundy hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy/40 rounded"
+            >
+              {t('prayer.journalCtaButton')}
+            </Link>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

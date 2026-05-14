@@ -94,7 +94,59 @@
       }
     },
     "mailtoNote": "In this preview version, prayer requests are sent through your email app. A secure in-app submission system will be added when the church backend is connected.",
-    "subjectPrefix": "Prayer request"
+    "subjectPrefix": "Prayer request",
+    "journalCtaTitle": "Want to keep it private?",
+    "journalCtaBody": "Your Prayer Journal is a private space for what's on your heart — no one else sees it, and you can come back to it any time.",
+    "journalCtaButton": "Open your Prayer Journal"
+  },
+  "journal": {
+    "title": "Prayer Journal",
+    "description": "A private space to write down what you are praying for — and to come back when prayers are answered.",
+    "pastoralNote": "Your journal is private to you. Only you can read what you write here.",
+    "addLabel": "What's on your heart today?",
+    "addPlaceholder": "Write a prayer, a hope, a worry, a thanksgiving…",
+    "addButton": "Save to journal",
+    "saving": "Saving…",
+    "emptyTitle": "Your journal is empty",
+    "empty": "No entries yet. Write down what's on your heart — your journal stays private to you.",
+    "answeredBadge": "Answered on {{date}}",
+    "markAnswered": "Mark as answered",
+    "markNotAnswered": "Mark as not answered",
+    "delete": "Delete entry",
+    "deleteConfirmTitle": "Delete this entry?",
+    "deleteConfirmBody": "This permanently removes the entry from your journal. This cannot be undone.",
+    "deleteConfirm": "Delete",
+    "deleteCancel": "Keep entry",
+    "loadError": "We couldn't load your journal. Please refresh and try again.",
+    "notConfiguredTitle": "Sign-in is being set up",
+    "notConfiguredBody": "The Prayer Journal needs a one-time sign-in to keep your entries private to you. We're finishing the setup — please check back soon.",
+    "errors": {
+      "bodyRequired": "Please write something before saving.",
+      "saveFailed": "We couldn't save your entry. Please try again.",
+      "updateFailed": "We couldn't update that entry. Please try again.",
+      "deleteFailed": "We couldn't delete that entry. Please try again."
+    }
+  },
+  "auth": {
+    "signInHeading": "Sign in to continue",
+    "signInBody": "We'll email you a one-tap sign-in link. No password to remember.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendLink": "Email me a sign-in link",
+    "sending": "Sending…",
+    "sentTitle": "Check your inbox",
+    "sentBody": "We sent a sign-in link to {{email}}. Open it on this device to finish signing in.",
+    "signingIn": "Signing you in…",
+    "signedInHeading": "You're signed in",
+    "signedInAs": "Signed in as {{email}}.",
+    "signOut": "Sign out",
+    "signingOut": "Signing out…",
+    "openJournal": "Open your Prayer Journal",
+    "notConfigured": "Sign-in is still being connected. Please check back soon.",
+    "errors": {
+      "emailRequired": "Please enter your email.",
+      "sendFailed": "We couldn't send the sign-in link. Please try again in a moment."
+    }
   },
   "connect": {
     "title": "Connect",
