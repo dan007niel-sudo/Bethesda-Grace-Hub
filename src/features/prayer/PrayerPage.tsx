@@ -9,8 +9,7 @@ import { PreviewNotice } from '../../components/PreviewNotice';
 import { FormField, FormGroup } from '../../components/FormField';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
-
-const PRAYER_EMAIL = 'besthesdahouseofgrace1010@gmail.com';
+import { CHURCH_EMAIL } from '../../data/events';
 
 type Visibility = 'private' | 'shared';
 
@@ -53,7 +52,7 @@ export default function PrayerPage() {
       request.trim(),
     ].join('\n');
 
-    const url = `mailto:${PRAYER_EMAIL}?subject=${encodeURIComponent(
+    const url = `mailto:${CHURCH_EMAIL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = url;

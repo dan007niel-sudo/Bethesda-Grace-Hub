@@ -9,13 +9,13 @@ const prompts: AssistantPrompt[] = [
     id: 'what-is-bgh',
     prompt: 'What is Bethesda Grace Hub?',
     response:
-      'Bethesda Grace Hub is the digital home of Bethesda Evangelical Church — House of Grace. It is a place to find sermons, ministries, prayer support, and clear next steps in your faith journey. The Hub is built to help you connect through grace, grow in faith, and discover where you can serve.',
+      'Bethesda Grace Hub is the digital home of Bethesda Evangelical Church — House of Grace. It is a place to find the weekly rhythm of services, prayer support, a private prayer journal, and clear next steps in your faith journey. The Hub is built to help you connect through grace, grow in faith, and discover where you can serve.',
   },
   {
     id: 'join-ministry',
     prompt: 'How can I join a ministry?',
     response:
-      'A great first step is to look through the Ministries page and read about teams that resonate with you — Worship, Youth, Hospitality, Children, Prayer, Media, Evangelism, or our Technical Team. Each ministry has a short description and a clear way to get involved. When the church directory is connected, you will be able to message the team lead directly. Until then, mention your interest at the welcome desk on a Sunday.',
+      'A great first step is simply to come on a Sunday and mention at the welcome desk which team you feel drawn to — Worship, Youth, Hospitality, Children, Prayer, Media, Evangelism, or the Technical Team. The pastoral team can introduce you to the lead in person. When in-app messaging is connected, you will also be able to reach team leads directly from the app.',
   },
   {
     id: 'romans-3-23',

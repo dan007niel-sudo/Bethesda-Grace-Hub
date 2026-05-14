@@ -1,18 +1,21 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSession } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
+
+type Status = 'pending' | 'error';
 
 export default function AuthCallbackPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { session, loading } = useSession();
+  const [status, setStatus] = useState<Status>('pending');
 
   useEffect(() => {
     if (!isSupabaseConfigured) {
       console.error('[auth-callback] Supabase is not configured');
-      navigate('/', { replace: true });
+      setStatus('error');
       return;
     }
     if (loading) return;
@@ -26,10 +29,29 @@ export default function AuthCallbackPage() {
     // session, the link was expired or invalid.
     const timer = window.setTimeout(() => {
       console.error('[auth-callback] no session after callback');
-      navigate('/', { replace: true });
+      setStatus('error');
     }, 4000);
     return () => window.clearTimeout(timer);
   }, [session, loading, navigate]);
+
+  if (status === 'error') {
+    return (
+      <div className="py-16 flex flex-col items-center text-center max-w-md mx-auto">
+        <h1 className="text-lg font-semibold text-charcoal mb-2">
+          {t('auth.callbackErrorTitle')}
+        </h1>
+        <p className="text-sm text-charcoal/80 leading-relaxed mb-6">
+          {t('auth.callbackError')}
+        </p>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 h-10 px-4 rounded-xl bg-burgundy text-white text-sm font-medium hover:bg-burgundy/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-burgundy/40"
+        >
+          {t('auth.backToHome')}
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="py-16 flex flex-col items-center text-center max-w-md mx-auto">

@@ -32,6 +32,9 @@ type RecurringPattern = {
 
 export const CHURCH_ADDRESS = 'Langestr. 19A, 49080 Osnabrück';
 export const CHURCH_COORDS = { lat: 52.269365, lng: 8.0397792 };
+// Preserved verbatim from the church website. Note the `bes` (not `be`) — see
+// CLAUDE.md "Lessons Learned > Content". Do not silently "fix" without confirmation.
+export const CHURCH_EMAIL = 'besthesdahouseofgrace1010@gmail.com';
 
 const patterns: RecurringPattern[] = [
   {

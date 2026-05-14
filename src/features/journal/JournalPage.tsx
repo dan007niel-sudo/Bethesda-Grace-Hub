@@ -152,6 +152,8 @@ export default function JournalPage() {
                   required
                   error={bodyError ?? undefined}
                   disabled={submitting}
+                  maxLength={4000}
+                  hint={t('journal.charCount', { count: body.length, max: 4000 })}
                 />
               </FormGroup>
               <div className="mt-4">

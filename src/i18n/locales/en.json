@@ -107,6 +107,7 @@
     "addPlaceholder": "Write a prayer, a hope, a worry, a thanksgiving…",
     "addButton": "Save to journal",
     "saving": "Saving…",
+    "charCount": "{{count}} / {{max}}",
     "emptyTitle": "Your journal is empty",
     "empty": "No entries yet. Write down what's on your heart — your journal stays private to you.",
     "answeredBadge": "Answered on {{date}}",
@@ -137,6 +138,9 @@
     "sentTitle": "Check your inbox",
     "sentBody": "We sent a sign-in link to {{email}}. Open it on this device to finish signing in.",
     "signingIn": "Signing you in…",
+    "callbackErrorTitle": "We couldn't sign you in",
+    "callbackError": "The sign-in link may have expired or already been used. Please request a fresh sign-in link from the Connect page.",
+    "backToHome": "Back to Home",
     "signedInHeading": "You're signed in",
     "signedInAs": "Signed in as {{email}}.",
     "signOut": "Sign out",
@@ -151,7 +155,7 @@
   "connect": {
     "title": "Connect",
     "description": "A space to reach the church between Sundays — soon with personal tools, today with a direct line to the pastoral team.",
-    "comingSoonBadge": "Connect is still being built. The features below are on the way; until then, please reach out directly.",
+    "comingSoonBadgeSignedOut": "More connect features (groups, broadcast, push) are still being built. Sign in below to use the prayer journal today.",
     "roadmapHeading": "What's coming",
     "roadmapItems": [
       "Member sign-in with your own profile",

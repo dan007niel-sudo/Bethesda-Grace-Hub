@@ -6,16 +6,14 @@ import { SectionHeader } from '../../components/SectionHeader';
 import { PreviewNotice } from '../../components/PreviewNotice';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
-import { CHURCH_ADDRESS } from '../../data/events';
+import { CHURCH_ADDRESS, CHURCH_EMAIL } from '../../data/events';
 import { useSession, signOut } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
 import { SignInCard } from '../journal/SignInCard';
 
-const CHURCH_EMAIL = 'besthesdahouseofgrace1010@gmail.com';
-
 // Indices in `connect.roadmapItems` that are now live (rendered with a check
 // icon). Anything else stays on the "coming soon" bullet.
-const LIVE_ROADMAP_INDICES = new Set<number>([1]);
+const LIVE_ROADMAP_INDICES = new Set<number>([0, 1]);
 
 export default function ConnectPage() {
   const { t } = useTranslation();
@@ -42,7 +40,9 @@ export default function ConnectPage() {
         description={t('connect.description')}
       />
 
-      <PreviewNotice>{t('connect.comingSoonBadge')}</PreviewNotice>
+      {!session ? (
+        <PreviewNotice>{t('connect.comingSoonBadgeSignedOut')}</PreviewNotice>
+      ) : null}
 
       {isSupabaseConfigured ? (
         loading ? (

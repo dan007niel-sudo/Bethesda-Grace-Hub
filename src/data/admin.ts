@@ -1,7 +1,7 @@
 import { getWeeklySchedule } from './events';
 
 export type AdminSection = {
-  id: 'events' | 'sermons' | 'announcements' | 'ministries' | 'prayer-requests';
+  id: 'events' | 'announcements' | 'prayer-requests';
   title: string;
   description: string;
   columns: string[];
@@ -26,21 +26,6 @@ const sections: AdminSection[] = [
     rows: eventRows,
   },
   {
-    id: 'sermons',
-    title: 'Manage Sermons',
-    description: 'Read-only preview of the sermon archive.',
-    columns: ['Title', 'Speaker', 'Date', 'Status'],
-    rows: [
-      ['The Grace That Finds Us', 'Pastor Stephen Essah', '2026-05-03', 'Published'],
-      ['A Quiet Faith in a Loud World', 'Pastor Stephen Essah', '2026-04-26', 'Published'],
-      ['House of Grace', 'Pastor Stephen Essah', '2026-04-19', 'Published'],
-      ['Serving as Worship', 'Pastor Stephen Essah', '2026-04-12', 'Published'],
-      ['When the Word Becomes Flesh', 'Pastor Stephen Essah', '2026-04-05', 'Published'],
-      ['Honest Prayer', 'Pastor Stephen Essah', '2026-03-29', 'Published'],
-      ['A Generation Looking for Truth', 'Pastor Stephen Essah', '2026-03-22', 'Published'],
-    ],
-  },
-  {
     id: 'announcements',
     title: 'Manage Announcements',
     description: 'Read-only preview of recent announcements.',
@@ -51,22 +36,6 @@ const sections: AdminSection[] = [
       ['New pastoral care line', '2026-04-30', 'Pastor Naomi', 'Published'],
       ['Summer schedule', '2026-04-22', 'Office', 'Draft'],
       ['Volunteer appreciation', '2026-04-15', 'Pastor Daniel', 'Archived'],
-    ],
-  },
-  {
-    id: 'ministries',
-    title: 'Manage Ministries',
-    description: 'Read-only preview of ministry teams.',
-    columns: ['Ministry', 'Lead', 'Members', 'Status'],
-    rows: [
-      ['Worship', 'Lena Ashford', '14', 'Active'],
-      ['Media', 'Tomás Ribeiro', '9', 'Active'],
-      ['Youth', '—', '6', 'Active'],
-      ['Prayer', 'Esther Adebayo', '11', 'Active'],
-      ['Hospitality', 'Mark Stenson', '18', 'Active'],
-      ['Children', 'Aisha Karim', '12', 'Active'],
-      ['Evangelism', 'Joel Vasquez', '7', 'Active'],
-      ['Technical Team', 'Daniel Lordson', '5', 'Active'],
     ],
   },
   {
