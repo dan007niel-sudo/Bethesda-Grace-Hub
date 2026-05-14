@@ -10,6 +10,7 @@ import { CHURCH_ADDRESS, CHURCH_EMAIL } from '../../data/events';
 import { useSession, signOut } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
 import { SignInCard } from '../journal/SignInCard';
+import { PushToggle } from './PushToggle';
 
 // Indices in `connect.roadmapItems` that are now live (rendered with a check
 // icon). Anything else stays on the "coming soon" bullet.
@@ -79,6 +80,8 @@ export default function ConnectPage() {
           <SignInCard />
         )
       ) : null}
+
+      {session ? <PushToggle /> : null}
 
       <Card padding="md">
         <h2 className="text-base font-semibold text-charcoal mb-3">

@@ -15,6 +15,7 @@ import NotFoundPage from '../components/NotFoundPage';
 // users who actually open the journal or land on the magic-link callback.
 const JournalPage = lazy(() => import('../features/journal/JournalPage'));
 const AuthCallbackPage = lazy(() => import('../features/auth/AuthCallbackPage'));
+const PushAdminPage = lazy(() => import('../features/admin/PushAdminPage'));
 
 function RouteLoading() {
   return (
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
       { path: '/connect', element: <ConnectPage /> },
       { path: '/admin-preview', element: <AdminPreviewPage /> },
       { path: '/admin-preview/:section', element: <AdminSectionPage /> },
+      { path: '/admin/push', element: lazyRoute(<PushAdminPage />) },
       { path: '/dev/components', element: <ComponentShowcasePage /> },
       { path: '/legal', element: <LegalPage /> },
       { path: '/legal/:doc', element: <LegalPage /> },

@@ -162,6 +162,21 @@
       "sendFailed": "We couldn't send the sign-in link. Please try again in a moment."
     }
   },
+  "push": {
+    "heading": "Weekly reminders",
+    "description": "Get a gentle nudge 30 minutes before each gathering.",
+    "toggleEnable": "Enable weekly reminders",
+    "toggleDisable": "Disable reminders",
+    "toggleSubscribed": "Reminders are on",
+    "toggleHint": "You'll get a push 30 minutes before each gathering. Turn it off any time.",
+    "toggleUnsupported": "Notifications aren't available in this browser yet.",
+    "toggleUnsupportedIos": "Add this app to your home screen first, then come back to enable reminders.",
+    "toggleNotConfigured": "Push notifications aren't configured yet — check back soon.",
+    "toggleDenied": "Notifications are blocked in your browser settings.",
+    "enabling": "Enabling…",
+    "disabling": "Disabling…",
+    "errorGeneric": "Something went wrong. Please try again in a moment."
+  },
   "connect": {
     "title": "Connect",
     "description": "A space to reach the church between Sundays — soon with personal tools, today with a direct line to the pastoral team.",
@@ -196,6 +211,31 @@
     "openSection": "Open",
     "rowsCount": "{{count}} entries",
     "backToAdmin": "Back to Admin Preview",
-    "notFound": "We couldn't find this admin section."
+    "notFound": "We couldn't find this admin section.",
+    "push": {
+      "title": "Send a push notification",
+      "description": "This sends a notification to every signed-in member who enabled reminders. Use it sparingly.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Short and clear (max 60 characters)",
+      "bodyLabel": "Message",
+      "bodyPlaceholder": "What do you want people to know? (max 200 characters)",
+      "urlLabel": "Open URL (optional)",
+      "urlPlaceholder": "/ — or a path inside the app",
+      "sendButton": "Send to everyone",
+      "sending": "Sending…",
+      "confirmTitle": "Send this notification?",
+      "confirmBody": "This will notify every member who enabled reminders. There's no recall once it's sent.",
+      "confirmSend": "Send now",
+      "confirmCancel": "Cancel",
+      "successTitle": "Notification sent",
+      "success": "Sent to {{sent}} device(s). Failures: {{failed}}.",
+      "errorGeneric": "We couldn't send the notification. Please try again.",
+      "errors": {
+        "titleRequired": "Please add a title.",
+        "titleTooLong": "Title is too long (max 60 characters).",
+        "bodyRequired": "Please add a message.",
+        "bodyTooLong": "Message is too long (max 200 characters)."
+      }
+    }
   }
 }
