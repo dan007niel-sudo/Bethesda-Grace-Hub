@@ -54,6 +54,14 @@ export function isPushConfigured(): boolean {
   );
 }
 
+// CX-H2 #4 — bounded fan-out. Sub-set is paged so a malicious user
+// cannot cause one giant in-memory blob, and each batch is sent with a
+// hard concurrency cap + per-request timeout so the function cannot be
+// stalled by a slow push gateway.
+const PAGE_SIZE = 1000;
+const CONCURRENCY = 50;
+const REQUEST_TIMEOUT_MS = 10_000;
+
 /**
  * Fan out a push payload to every row in `push_subscriptions`. Stale
  * endpoints (404/410) are deleted so the table self-heals.
@@ -64,40 +72,49 @@ export async function sendPushToAll(
 ): Promise<PushFanoutResult> {
   configure();
 
-  const { data, error } = await client
-    .from('push_subscriptions')
-    .select('id, endpoint, p256dh, auth_secret');
-  if (error) throw error;
-
-  const subs = (data ?? []) as SubscriptionRow[];
   const json = JSON.stringify(payload);
 
   let sent = 0;
   let failed = 0;
   const staleIds: string[] = [];
 
-  await Promise.all(
-    subs.map(async (row) => {
-      try {
-        await webpush.sendNotification(
-          {
-            endpoint: row.endpoint,
-            keys: { p256dh: row.p256dh, auth: row.auth_secret },
-          },
-          json,
-        );
-        sent++;
-      } catch (err) {
-        const statusCode = (err as { statusCode?: number }).statusCode;
-        if (statusCode === 404 || statusCode === 410) {
-          staleIds.push(row.id);
+  let from = 0;
+  while (true) {
+    const { data, error } = await client
+      .from('push_subscriptions')
+      .select('id, endpoint, p256dh, auth_secret')
+      .order('id', { ascending: true })
+      .range(from, from + PAGE_SIZE - 1);
+    if (error) throw error;
+    const subs = (data ?? []) as SubscriptionRow[];
+    if (subs.length === 0) break;
+
+    for (let i = 0; i < subs.length; i += CONCURRENCY) {
+      const chunk = subs.slice(i, i + CONCURRENCY);
+      const results = await Promise.allSettled(
+        chunk.map((row) => sendOne(row, json)),
+      );
+      for (let j = 0; j < results.length; j++) {
+        const r = results[j];
+        const row = chunk[j];
+        if (r.status === 'fulfilled') {
+          sent++;
         } else {
-          failed++;
-          console.error('[webPush] send failed', statusCode, err);
+          const err = r.reason;
+          const statusCode = (err as { statusCode?: number })?.statusCode;
+          if (statusCode === 404 || statusCode === 410) {
+            staleIds.push(row.id);
+          } else {
+            failed++;
+            console.error('[webPush] send failed', statusCode, err);
+          }
         }
       }
-    }),
-  );
+    }
+
+    if (subs.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
+  }
 
   let removed = 0;
   if (staleIds.length > 0) {
@@ -113,4 +130,34 @@ export async function sendPushToAll(
   }
 
   return { sent, failed, removed };
+}
+
+async function sendOne(row: SubscriptionRow, payloadJson: string): Promise<void> {
+  // Belt-and-suspenders timeout: pass `signal` (in case web-push forwards
+  // it to fetch in this version) AND race the whole call against a
+  // wall-clock timer so a stalled gateway can't hang the fan-out even if
+  // the library swallows the AbortSignal.
+  const controller = new AbortController();
+  let timeoutTimer: number | undefined;
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutTimer = setTimeout(() => {
+      controller.abort();
+      reject(new Error('web-push request timeout'));
+    }, REQUEST_TIMEOUT_MS) as unknown as number;
+  });
+  try {
+    await Promise.race([
+      webpush.sendNotification(
+        {
+          endpoint: row.endpoint,
+          keys: { p256dh: row.p256dh, auth: row.auth_secret },
+        },
+        payloadJson,
+        { signal: controller.signal } as Record<string, unknown>,
+      ),
+      timeoutPromise,
+    ]);
+  } finally {
+    if (timeoutTimer !== undefined) clearTimeout(timeoutTimer);
+  }
 }

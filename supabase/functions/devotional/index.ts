@@ -17,14 +17,19 @@ import { KNOWLEDGE } from '../chat/_knowledge.ts';
 
 const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
 const MODEL = Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.5-flash';
-const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN') ?? '*';
+const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN');
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers':
-    'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'GET, OPTIONS',
-};
+function corsHeaders(req?: Request): Record<string, string> {
+  // Preflight must succeed even when ALLOWED_ORIGIN is unset; fall back
+  // to echoing the request Origin for OPTIONS only.
+  const origin = ALLOWED_ORIGIN ?? req?.headers.get('Origin') ?? '';
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  };
+}
 
 const SUCCESS_TTL_MS = 26 * 60 * 60 * 1000; // 26h — covers daily rollover with slack
 const FALLBACK_TTL_MS = 60 * 60 * 1000; // 1h — don't pin a fallback all day
@@ -51,8 +56,19 @@ type Devotional = {
 };
 
 serve(async (req) => {
+  // S2 — preflight must be answered before env-check 500 so browsers
+  // can read the real error body.
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { status: 204, headers: corsHeaders(req) });
+  }
+
+  // H3 — fail-closed CORS: if ALLOWED_ORIGIN is not set, refuse everything.
+  if (!ALLOWED_ORIGIN) {
+    console.error('ALLOWED_ORIGIN not set');
+    return new Response(
+      JSON.stringify({ error: 'Misconfigured: ALLOWED_ORIGIN not set' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
+    );
   }
 
   if (req.method !== 'GET') {
@@ -77,26 +93,26 @@ serve(async (req) => {
   // Generate fresh.
   let devotional: Devotional;
   let ttl = SUCCESS_TTL_MS;
-  let debugReason: string | null = null;
   try {
     const result = await generateDevotional();
     if (result.devotional && isValidDevotional({ ...result.devotional, date })) {
       devotional = { date, ...result.devotional };
     } else {
-      console.error('Invalid Gemini devotional payload, using fallback:', result.reason);
-      debugReason = result.reason ?? 'invalid-payload';
+      // CX-M2 — debug reason stays in logs only, never in response body.
+      console.error(
+        '[devotional] invalid Gemini payload, using fallback:',
+        result.reason ?? 'invalid-payload',
+      );
       devotional = fallbackDevotional(date);
       ttl = FALLBACK_TTL_MS;
     }
   } catch (e) {
-    console.error('Devotional generation failed:', e);
-    debugReason = `exception:${e instanceof Error ? e.message : String(e)}`;
+    console.error(
+      '[devotional] generation failed, using fallback:',
+      e instanceof Error ? e.message : String(e),
+    );
     devotional = fallbackDevotional(date);
     ttl = FALLBACK_TTL_MS;
-  }
-
-  if (debugReason) {
-    (devotional as Devotional & { _debug?: string })._debug = debugReason;
   }
 
   if (kv) {
@@ -240,6 +256,6 @@ function fallbackDevotional(date: string): Devotional {
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
   });
 }

@@ -17,17 +17,25 @@ import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 import { isPushConfigured, sendPushToAll } from '../_shared/webPush.ts';
 
-const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN') ?? '*';
+const ALLOWED_ORIGIN = Deno.env.get('ALLOWED_ORIGIN');
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') ?? '';
 const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') ?? '';
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers':
-    'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+const APP_ORIGIN = 'https://bethesda-grace-hub.onrender.com';
+
+function corsHeaders(req?: Request): Record<string, string> {
+  // Preflight needs a valid CORS response even when ALLOWED_ORIGIN is
+  // missing, so we echo the request Origin for OPTIONS only; the real
+  // POST still 500s on the env check below.
+  const origin = ALLOWED_ORIGIN ?? req?.headers.get('Origin') ?? '';
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+}
 
 const TITLE_MAX = 60;
 const BODY_MAX = 200;
@@ -43,9 +51,21 @@ function adminEmails(): Set<string> {
 }
 
 serve(async (req) => {
+  // S2 — answer OPTIONS preflight BEFORE any env-check 500 so the browser
+  // surfaces real errors instead of CORS failures.
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { status: 204, headers: corsHeaders(req) });
   }
+
+  // H3 — fail-closed CORS: if ALLOWED_ORIGIN is not set, refuse everything.
+  if (!ALLOWED_ORIGIN) {
+    console.error('ALLOWED_ORIGIN not set');
+    return new Response(
+      JSON.stringify({ error: 'Misconfigured: ALLOWED_ORIGIN not set' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } },
+    );
+  }
+
   if (req.method !== 'POST') {
     return json({ error: 'Method not allowed' }, 405);
   }
@@ -86,12 +106,38 @@ serve(async (req) => {
   }
   const title = typeof body.title === 'string' ? body.title.trim() : '';
   const message = typeof body.body === 'string' ? body.body.trim() : '';
-  const url = typeof body.url === 'string' ? body.url.trim() : '';
   if (!title || title.length > TITLE_MAX) {
     return json({ error: 'Invalid title' }, 400);
   }
   if (!message || message.length > BODY_MAX) {
     return json({ error: 'Invalid body' }, 400);
+  }
+
+  // H2 — url validation. If present, must be a same-origin relative path
+  // (`/foo`, never `//foo` which is protocol-relative) or an absolute URL
+  // whose parsed `.origin` exactly matches APP_ORIGIN. Using `new URL()`
+  // rather than `startsWith` defends against userinfo-tricks like
+  // `https://app.example.com@evil.com/`.
+  let url: string | undefined;
+  if (body.url !== undefined && body.url !== null) {
+    if (typeof body.url !== 'string') {
+      return json({ error: 'Invalid url' }, 400);
+    }
+    const candidate = body.url.trim();
+    if (candidate) {
+      const isRelative = candidate.startsWith('/') && !candidate.startsWith('//');
+      if (!isRelative) {
+        try {
+          const parsed = new URL(candidate);
+          if (parsed.origin !== APP_ORIGIN) {
+            return json({ error: 'Invalid url' }, 400);
+          }
+        } catch {
+          return json({ error: 'Invalid url' }, 400);
+        }
+      }
+      url = candidate;
+    }
   }
 
   // 3) Fan out with the service role (bypasses RLS).
@@ -102,7 +148,7 @@ serve(async (req) => {
     const result = await sendPushToAll(adminClient, {
       title,
       body: message,
-      url: url || undefined,
+      url,
     });
     return json(result);
   } catch (err) {
@@ -114,6 +160,6 @@ serve(async (req) => {
 function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', ...corsHeaders },
+    headers: { 'Content-Type': 'application/json', ...corsHeaders() },
   });
 }
