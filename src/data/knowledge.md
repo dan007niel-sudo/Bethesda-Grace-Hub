@@ -105,11 +105,57 @@ The church operates these ministries:
 | Sunday | 13:30–15:30 | Sunday Service | Lange Str. 19A, Osnabrück |
 | Sunday (every 2 weeks) | 11:00–12:30 | Youth Service | Lange Str. 19A, Osnabrück |
 | Monday | 20:30–21:30 | Youth Prayers | Online (Zoom) |
-| Tuesday | 18:00–19:30 | Bible Class | Lange Str. 19A, Osnabrück |
+| Tuesday | 18:00–19:30 | Bible Class | Online (Zoom) |
 | Wednesday | 18:00–19:30 | Midweek Prayers | Lange Str. 19A, Osnabrück |
 | Friday | 18:00–19:30 | Friday Prayers | Online (Zoom) |
 
-Zoom meeting (Monday + Friday): https://us04web.zoom.us/j/7532078373 — Passcode: 497658
+Zoom meeting (Monday, Tuesday Bible Class, Friday): https://us04web.zoom.us/j/7532078373 — Passcode: 497658
+
+Naming note: the Youth programme is branded "Leuchtturm" (German for "Lighthouse"). The Friday online prayer meeting is also called "Prayer Towers" inside the church.
+
+## Sunday Service — what to expect
+
+**Language.** The entire service is held in English.
+
+**Service flow** (roughly two hours):
+
+1. Opening Prayer
+2. Praises
+3. Worship
+4. Word of God (the sermon)
+5. Prayer
+6. Offering
+7. Announcements
+8. Ending
+
+**Live worship band.** Praises and worship are led by a live worship band every Sunday.
+
+**Children.** Children stay with their parents for Opening Prayer, Praises, and Worship. Once the **Word of God** (sermon) begins, supervised children's ministry takes over so parents can focus.
+
+**Dress code.** None. Come as you are.
+
+**What to bring.** Please bring your own Bible if you have one. Snacks for children are available at the church.
+
+**Kinderwagen / strollers** are welcome in the main hall.
+
+**Getting there.** Lange Str. 19A, 49080 Osnabrück. The Bethesda Grace Hub app has a built-in map with directions on the "Find us" tab — point members there if they ask for directions.
+
+## Giving — how to tithe or donate
+
+There are two ways to give:
+
+**1. Cash offering during the Sunday Service.** The "Offering" segment of every Sunday Service is the moment to give in cash if you wish.
+
+**2. Bank transfer:**
+
+- Account holder: **Bethesda Evangelical Church Osnabrück**
+- IBAN: **DE54 2655 0105 1551 8615 76**
+- BIC: **NOLADE22XXX** (Sparkasse Osnabrück)
+- Reference (Verwendungszweck) example: "Tithe May 2026" or "Spende"
+
+**Note:** The church does **not** currently issue official donation receipts (Spendenquittungen) for German tax purposes.
+
+PayPal or other digital giving methods are **not** offered.
 
 ## Special events
 
