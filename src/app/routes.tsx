@@ -38,6 +38,7 @@ export const router = createBrowserRouter([
     element: <AppShell />,
     children: [
       { path: '/', element: <HomePage /> },
+      { path: '/demo', element: <HomePage /> },
       { path: '/assistant', element: <AssistantPage /> },
       { path: '/prayer', element: <PrayerPage /> },
       { path: '/journal', element: lazyRoute(<JournalPage />) },

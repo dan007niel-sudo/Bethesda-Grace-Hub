@@ -4,9 +4,11 @@ import { BottomNav } from './BottomNav';
 import { Sidebar } from './Sidebar';
 import { Wordmark } from './Wordmark';
 import { Logo } from './Logo';
+import { useDemoMode } from '../lib/demoMode';
 
 export function AppShell() {
   const { t } = useTranslation();
+  const demoMode = useDemoMode();
   return (
     <div className="min-h-screen flex bg-cream text-charcoal">
       <a href="#main" className="skip-link">
@@ -22,6 +24,11 @@ export function AppShell() {
             </NavLink>
           </div>
         </header>
+        {demoMode ? (
+          <div className="border-b border-gold/40 bg-burgundy px-4 py-2 text-center text-[11px] font-semibold uppercase tracking-wide text-white">
+            Visitor preview: live submissions, sign-in, push notifications and live assistant calls are disabled.
+          </div>
+        ) : null}
         <main
           id="main"
           tabIndex={-1}

@@ -9,6 +9,7 @@ import { Button } from '../../components/Button';
 import { CHURCH_ADDRESS, CHURCH_EMAIL } from '../../data/events';
 import { useSession, signOut } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
+import { useDemoMode } from '../../lib/demoMode';
 import { SignInCard } from '../journal/SignInCard';
 import { PushToggle } from './PushToggle';
 
@@ -21,6 +22,7 @@ export default function ConnectPage() {
   const { session, loading } = useSession();
   const [signingOut, setSigningOut] = useState(false);
   const roadmap = t('connect.roadmapItems', { returnObjects: true }) as string[];
+  const demoMode = useDemoMode();
 
   async function handleSignOut() {
     setSigningOut(true);
@@ -45,7 +47,13 @@ export default function ConnectPage() {
         <PreviewNotice>{t('connect.comingSoonBadgeSignedOut')}</PreviewNotice>
       ) : null}
 
-      {isSupabaseConfigured ? (
+      {demoMode ? (
+        <PreviewNotice>
+          Visitor preview: sign-in, private journal access and push subscriptions are disabled.
+        </PreviewNotice>
+      ) : null}
+
+      {!demoMode && isSupabaseConfigured ? (
         loading ? (
           <Card padding="md">
             <p className="text-sm text-charcoal/70">{t('common.loading')}</p>
@@ -81,7 +89,7 @@ export default function ConnectPage() {
         )
       ) : null}
 
-      {session ? <PushToggle /> : null}
+      {!demoMode && session ? <PushToggle /> : null}
 
       <Card padding="md">
         <h2 className="text-base font-semibold text-charcoal mb-3">

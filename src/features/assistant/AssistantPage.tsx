@@ -11,6 +11,7 @@ import {
   isAssistantConfigured,
   type AssistantTurn,
 } from '../../lib/assistant';
+import { useDemoMode } from '../../lib/demoMode';
 
 type DisplayTurn = { role: 'user' | 'assistant'; text: string };
 
@@ -23,6 +24,7 @@ export default function AssistantPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const conversationRef = useRef<HTMLDivElement>(null);
+  const demoMode = useDemoMode();
 
   useEffect(() => {
     void (async () => {
@@ -45,12 +47,12 @@ export default function AssistantPage() {
     setTurns((prev) => [...prev, { role: 'user', text: message }]);
     setBusy(true);
 
-    if (!isAssistantConfigured) {
+    if (demoMode || !isAssistantConfigured) {
       // Fallback: look up the suggested prompt's mock response if it matches.
       const match = (prompts ?? []).find((p) => p.prompt === message);
       const reply =
         match?.response ??
-        "The assistant isn't connected yet. Please try one of the suggested questions for now.";
+        "This visitor preview uses prepared answers. Please try one of the suggested questions.";
       setTimeout(() => {
         setTurns((prev) => [...prev, { role: 'assistant', text: reply }]);
         setBusy(false);
@@ -87,7 +89,7 @@ export default function AssistantPage() {
     void send(text);
   }
 
-  const inputDisabled = busy;
+  const inputDisabled = busy || demoMode;
 
   return (
     <div className="py-8 lg:py-10 max-w-2xl">
@@ -98,6 +100,12 @@ export default function AssistantPage() {
       />
 
       <PreviewNotice>{t('assistant.previewNotice')}</PreviewNotice>
+      {demoMode ? (
+        <PreviewNotice>
+          Visitor preview: suggested questions use prepared answers, and free-form assistant
+          calls are disabled.
+        </PreviewNotice>
+      ) : null}
 
       {/* Conversation */}
       <div
@@ -175,7 +183,9 @@ export default function AssistantPage() {
           onChange={(e) => setInput(e.target.value)}
           disabled={inputDisabled || !isAssistantConfigured}
           placeholder={
-            isAssistantConfigured
+            demoMode
+              ? 'Free questions are disabled in visitor preview.'
+              : isAssistantConfigured
               ? t('assistant.inputPlaceholder')
               : t('assistant.inputPlaceholderDisabled')
           }

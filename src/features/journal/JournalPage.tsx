@@ -10,6 +10,7 @@ import { Button } from '../../components/Button';
 import { FormField, FormGroup } from '../../components/FormField';
 import { useSession } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
+import { useDemoMode } from '../../lib/demoMode';
 import {
   addEntry,
   deleteEntry,
@@ -23,6 +24,7 @@ import { JournalEntryCard } from './JournalEntryCard';
 export default function JournalPage() {
   const { t } = useTranslation();
   const { session, loading: sessionLoading } = useSession();
+  const demoMode = useDemoMode();
 
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [loadState, setLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(
@@ -47,13 +49,16 @@ export default function JournalPage() {
   }, []);
 
   useEffect(() => {
-    if (session) {
+    if (demoMode) {
+      setEntries([]);
+      setLoadState('idle');
+    } else if (session) {
       load();
     } else {
       setEntries([]);
       setLoadState('idle');
     }
-  }, [session, load]);
+  }, [demoMode, session, load]);
 
   async function handleAdd(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -123,7 +128,16 @@ export default function JournalPage() {
 
       <PastoralNote>{t('journal.pastoralNote')}</PastoralNote>
 
-      {!isSupabaseConfigured ? (
+      {demoMode ? (
+        <Card padding="md">
+          <h2 className="text-base font-semibold text-charcoal mb-2">
+            Visitor preview
+          </h2>
+          <p className="text-sm text-charcoal/80 leading-relaxed">
+            Private journal entries, updates and deletes are disabled in this preview mode.
+          </p>
+        </Card>
+      ) : !isSupabaseConfigured ? (
         <Card padding="md">
           <h2 className="text-base font-semibold text-charcoal mb-2">
             {t('journal.notConfiguredTitle')}

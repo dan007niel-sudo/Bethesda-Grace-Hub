@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { FormField, FormGroup } from '../../components/FormField';
 import { signInWithMagicLink } from '../../lib/auth';
 import { isSupabaseConfigured } from '../../lib/supabase';
+import { useDemoMode } from '../../lib/demoMode';
 
 type SignInCardProps = {
   redirectTo?: string;
@@ -18,8 +19,22 @@ export function SignInCard({ redirectTo }: SignInCardProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
   const [sentEmail, setSentEmail] = useState<string>('');
+  const demoMode = useDemoMode();
 
   const configured = isSupabaseConfigured;
+
+  if (demoMode) {
+    return (
+      <Card padding="md">
+        <h2 className="text-base font-semibold text-charcoal mb-2">
+          Visitor preview
+        </h2>
+        <p className="text-sm text-charcoal/80 leading-relaxed">
+          Sign-in and private journal writes are disabled in this preview mode.
+        </p>
+      </Card>
+    );
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

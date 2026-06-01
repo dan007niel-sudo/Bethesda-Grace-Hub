@@ -10,6 +10,7 @@ import { FormField, FormGroup } from '../../components/FormField';
 import { Button } from '../../components/Button';
 import { Card } from '../../components/Card';
 import { CHURCH_EMAIL } from '../../data/events';
+import { useDemoMode } from '../../lib/demoMode';
 
 type Visibility = 'private' | 'shared';
 
@@ -23,6 +24,8 @@ export default function PrayerPage() {
   const [request, setRequest] = useState('');
   const [visibility, setVisibility] = useState<Visibility>('private');
   const [errors, setErrors] = useState<Errors>({});
+  const [demoSubmitted, setDemoSubmitted] = useState(false);
+  const demoMode = useDemoMode();
 
   function validate(): Errors {
     const next: Errors = {};
@@ -37,6 +40,11 @@ export default function PrayerPage() {
     const next = validate();
     setErrors(next);
     if (Object.keys(next).length > 0) return;
+
+    if (demoMode) {
+      setDemoSubmitted(true);
+      return;
+    }
 
     const visibilityLabel =
       visibility === 'private'
@@ -64,6 +72,7 @@ export default function PrayerPage() {
     setRequest('');
     setVisibility('private');
     setErrors({});
+    setDemoSubmitted(false);
   }
 
   return (
@@ -75,6 +84,12 @@ export default function PrayerPage() {
       />
 
       <PastoralNote>{t('prayer.pastoralNote')}</PastoralNote>
+      {demoMode ? (
+        <PreviewNotice>
+          Visitor preview: this form validates locally, but no email is opened and no request is
+          submitted.
+        </PreviewNotice>
+      ) : null}
 
       <form onSubmit={handleSubmit} noValidate className="mt-6">
         <FormGroup>
@@ -155,13 +170,21 @@ export default function PrayerPage() {
         <div className="mt-6 flex flex-wrap gap-2">
           <Button type="submit" variant="primary">
             <Mail size={16} aria-hidden="true" />
-            {t('prayer.form.submit')}
+            {demoMode ? 'Preview request locally' : t('prayer.form.submit')}
           </Button>
           <Button type="button" variant="ghost" onClick={handleCancel}>
             {t('common.cancel')}
           </Button>
         </div>
       </form>
+
+      {demoSubmitted ? (
+        <Card padding="md" className="mt-6 border-burgundy/30 bg-burgundy/5">
+          <p className="text-sm font-medium text-charcoal">
+            Visitor preview only: no prayer request was sent.
+          </p>
+        </Card>
+      ) : null}
 
       <div className="mt-8">
         <PreviewNotice>{t('prayer.mailtoNote')}</PreviewNotice>

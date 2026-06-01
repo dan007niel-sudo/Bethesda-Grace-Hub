@@ -16,6 +16,7 @@ import { getEvents, CHURCH_ADDRESS, type ChurchEvent } from '../../data/events';
 import { getAnnouncements, type Announcement } from '../../data/announcements';
 import { getDevotional, type Devotional } from '../../lib/devotional';
 import { useLiveService } from '../../lib/liveService';
+import { DEMO_DEVOTIONAL, useDemoMode } from '../../lib/demoMode';
 
 type QuickActionDef = {
   to: string;
@@ -30,6 +31,7 @@ export default function HomePage() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [devotional, setDevotional] = useState<Devotional | null>(null);
   const live = useLiveService();
+  const demoMode = useDemoMode();
 
   useEffect(() => {
     void (async () => {
@@ -40,6 +42,11 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    if (demoMode) {
+      setDevotional(DEMO_DEVOTIONAL);
+      return;
+    }
+
     void (async () => {
       try {
         const d = await getDevotional();
@@ -49,7 +56,7 @@ export default function HomePage() {
         console.warn('Devotional unavailable, using static fallback:', e);
       }
     })();
-  }, []);
+  }, [demoMode]);
 
   const todayLabel = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',

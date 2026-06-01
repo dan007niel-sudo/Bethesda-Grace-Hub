@@ -8,7 +8,7 @@ export const isSupabaseConfigured = Boolean(URL && KEY);
 // Create the client even if vars are missing so feature code can import the
 // singleton without crashing; calls will fail until env is set, which the UI
 // already gates behind `isSupabaseConfigured`.
-export const supabase = createClient(URL ?? '', KEY ?? '', {
+export const supabase = createClient(URL ?? 'https://example.supabase.co', KEY ?? 'demo-anon-key', {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
