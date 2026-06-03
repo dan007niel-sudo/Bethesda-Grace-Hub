@@ -1,0 +1,245 @@
+{
+  "common": {
+    "appName": "Bethesda Grace Hub",
+    "tagline": "Ein digitales Zuhause für Gnade, Wachstum und Dienst.",
+    "loading": "Wird geladen…",
+    "cancel": "Abbrechen",
+    "submit": "Absenden",
+    "learnMore": "Mehr erfahren",
+    "back": "Zurück",
+    "viewAll": "Alle anzeigen",
+    "skipToContent": "Zum Inhalt springen",
+    "language": "Sprache",
+    "changeLanguage": "Sprache ändern",
+    "langEnglish": "English",
+    "langGerman": "Deutsch"
+  },
+  "nav": {
+    "home": "Start",
+    "ask": "Fragen",
+    "pray": "Beten",
+    "connect": "Kontakt",
+    "adminPreview": "Admin-Vorschau"
+  },
+  "home": {
+    "title": "Willkommen zu Hause",
+    "heroIntro": "Ein digitales Zuhause für Gnade, Wachstum und Dienst.",
+    "scriptureVerse": "Denn alle haben gesündigt und verfehlen die Herrlichkeit, die sie vor Gott haben sollten, sodass sie ohne Verdienst gerechtfertigt werden durch seine Gnade aufgrund der Erlösung, die in Christus Jesus ist.",
+    "scriptureRef": "Römer 3,23–24",
+    "devotional": {
+      "todayBadge": "Heute"
+    },
+    "welcome": "Egal, wo du auf deinem Weg gerade stehst — du bist hier willkommen. Das ist ein Ort, an dem du Gebetsunterstützung, den täglichen Rhythmus der Gemeinde und einen klaren nächsten Schritt findest.",
+    "quickActions": {
+      "title": "Wo möchtest du beginnen?",
+      "askAssistant": "Frag den Grace Assistant",
+      "askAssistantSub": "Schnelle Antworten rund um die Gemeinde",
+      "prayerRequest": "Ein Gebetsanliegen senden",
+      "prayerRequestSub": "Wir beten mit dir",
+      "connect": "Mit der Gemeinde in Kontakt treten",
+      "connectSub": "Erreiche einen Pastor und sieh, was als Nächstes kommt"
+    },
+    "events": {
+      "title": "Kommende Termine",
+      "description": "Was in den nächsten Wochen ansteht",
+      "empty": "Noch keine Termine im Kalender — schau bald wieder vorbei.",
+      "joinZoom": "Per Zoom teilnehmen",
+      "passcode": "Kenncode"
+    },
+    "announcements": {
+      "title": "Ankündigungen",
+      "description": "Neues aus der Gemeindefamilie",
+      "empty": "Gerade gibt es nichts Neues zu teilen."
+    },
+    "findUs": {
+      "title": "So findest du uns",
+      "directionsHeading": "Route planen",
+      "driving": "Mit dem Auto",
+      "walking": "Zu Fuß",
+      "fromHbf": "Ab Osnabrück Hbf",
+      "transit": "Öffentliche Verkehrsmittel"
+    }
+  },
+  "events": {
+    "nowBadge": "Jetzt",
+    "soonBadge": "Bald"
+  },
+  "live": {
+    "bannerLiveTitle": "{{title}} · jetzt live",
+    "bannerSoonTitle": "{{title}} beginnt in {{minutes}} Min.",
+    "bannerLocation": "Bei {{location}}",
+    "bannerJoinZoom": "Per Zoom teilnehmen"
+  },
+  "assistant": {
+    "title": "Grace Assistant",
+    "description": "Ein behutsamer Begleiter, der auf der Lehre unserer Gemeinde gründet.",
+    "intro": "Hallo — ich bin der Grace Assistant. Frag mich alles über Bethesda House of Grace — Gottesdienstzeiten, Dienste, was wir glauben — oder stell eine Frage zur Bibel. Tippe auf einen Vorschlag oder schreib einfach selbst.",
+    "suggestionsHeading": "Vorgeschlagene Fragen",
+    "inputPlaceholder": "Frag den Grace Assistant…",
+    "inputPlaceholderDisabled": "Freie Fragen sind verfügbar, sobald der Assistent angebunden ist.",
+    "send": "Senden",
+    "thinking": "Denkt nach…",
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuch es gleich noch einmal.",
+    "previewNotice": "Der Grace Assistant gründet auf der veröffentlichten Lehre unserer Gemeinde. Für tiefere seelsorgerliche oder theologische Gespräche wende dich an Pastor Stephen Essah oder das Leitungsteam.",
+    "pastoralNote": "Der Assistent ist da, um zu begleiten und zu ermutigen. Er ersetzt keine Seelsorge, keine Gemeindeleitung und keine professionelle Unterstützung in dringenden Situationen.",
+    "youLabel": "Du",
+    "assistantLabel": "Grace Assistant"
+  },
+  "prayer": {
+    "title": "Gebet",
+    "description": "Sag uns, was dich bewegt. Es ist uns eine Ehre, mit dir zu beten.",
+    "pastoralNote": "Das Gebetsteam betet achtsam und vertraulich. Wenn deine Situation dringend ist oder du dich in einer Krise befindest, wende dich bitte zusätzlich an einen Pastor oder eine qualifizierte professionelle Stelle.",
+    "form": {
+      "name": "Dein Name",
+      "namePlaceholder": "Vor- und Nachname",
+      "contact": "E-Mail oder Telefon",
+      "contactPlaceholder": "Wir nutzen das nur, um uns behutsam bei dir zu melden",
+      "request": "Gebetsanliegen",
+      "requestPlaceholder": "Teile, was dich bewegt…",
+      "visibility": "Wer soll dieses Anliegen sehen?",
+      "visibilityPrivate": "Privat — nur das Seelsorgeteam",
+      "visibilityShared": "Mit dem Gebetsteam teilen",
+      "visibilityHint": "Du kannst es jederzeit ändern, indem du dich an einen Pastor wendest.",
+      "submit": "Per E-Mail senden",
+      "errors": {
+        "name": "Bitte gib deinen Namen ein.",
+        "contact": "Bitte gib eine E-Mail oder Telefonnummer an, damit wir uns melden können.",
+        "request": "Bitte teile uns mit, wofür wir beten dürfen."
+      }
+    },
+    "mailtoNote": "In dieser Vorschauversion werden Gebetsanliegen über deine E-Mail-App gesendet. Ein sicheres Einreichungssystem in der App folgt, sobald das Gemeinde-Backend angebunden ist.",
+    "subjectPrefix": "Gebetsanliegen",
+    "journalCtaTitle": "Möchtest du es für dich behalten?",
+    "journalCtaBody": "Dein Gebetstagebuch ist ein privater Raum für das, was dich bewegt — niemand sonst sieht es, und du kannst jederzeit dorthin zurückkehren.",
+    "journalCtaButton": "Öffne dein Gebetstagebuch"
+  },
+  "journal": {
+    "title": "Gebetstagebuch",
+    "description": "Ein privater Raum, um aufzuschreiben, wofür du betest — und um zurückzukehren, wenn Gebete erhört werden.",
+    "pastoralNote": "Dein Tagebuch ist privat. Nur du kannst lesen, was du hier schreibst.",
+    "addLabel": "Was bewegt dich heute?",
+    "addPlaceholder": "Schreib ein Gebet, eine Hoffnung, eine Sorge, einen Dank…",
+    "addButton": "Im Tagebuch speichern",
+    "saving": "Wird gespeichert…",
+    "charCount": "{{count}} / {{max}}",
+    "emptyTitle": "Dein Tagebuch ist leer",
+    "empty": "Noch keine Einträge. Schreib auf, was dich bewegt — dein Tagebuch bleibt privat.",
+    "answeredBadge": "Erhört am {{date}}",
+    "markAnswered": "Als erhört markieren",
+    "markNotAnswered": "Als nicht erhört markieren",
+    "delete": "Eintrag löschen",
+    "deleteConfirmTitle": "Diesen Eintrag löschen?",
+    "deleteConfirmBody": "Dadurch wird der Eintrag dauerhaft aus deinem Tagebuch entfernt. Das kann nicht rückgängig gemacht werden.",
+    "deleteConfirm": "Löschen",
+    "deleteCancel": "Eintrag behalten",
+    "loadError": "Wir konnten dein Tagebuch nicht laden. Bitte aktualisiere die Seite und versuch es erneut.",
+    "notConfiguredTitle": "Die Anmeldung wird gerade eingerichtet",
+    "notConfiguredBody": "Das Gebetstagebuch braucht eine einmalige Anmeldung, damit deine Einträge privat bleiben. Wir schließen die Einrichtung gerade ab — schau bald wieder vorbei.",
+    "errors": {
+      "bodyRequired": "Bitte schreib etwas, bevor du speicherst.",
+      "saveFailed": "Wir konnten deinen Eintrag nicht speichern. Bitte versuch es erneut.",
+      "updateFailed": "Wir konnten diesen Eintrag nicht aktualisieren. Bitte versuch es erneut.",
+      "deleteFailed": "Wir konnten diesen Eintrag nicht löschen. Bitte versuch es erneut."
+    }
+  },
+  "auth": {
+    "signInHeading": "Melde dich an, um fortzufahren",
+    "signInBody": "Wir senden dir per E-Mail einen Anmeldelink für einen Tipp. Kein Passwort zu merken.",
+    "emailLabel": "E-Mail",
+    "emailPlaceholder": "du@beispiel.de",
+    "sendLink": "Schick mir einen Anmeldelink",
+    "sending": "Wird gesendet…",
+    "sentTitle": "Schau in dein Postfach",
+    "sentBody": "Wir haben einen Anmeldelink an {{email}} gesendet. Öffne ihn auf diesem Gerät, um die Anmeldung abzuschließen.",
+    "signingIn": "Du wirst angemeldet…",
+    "callbackErrorTitle": "Wir konnten dich nicht anmelden",
+    "callbackError": "Der Anmeldelink ist möglicherweise abgelaufen oder wurde bereits verwendet. Bitte fordere auf der Kontaktseite einen neuen Anmeldelink an.",
+    "backToHome": "Zurück zum Start",
+    "signedInHeading": "Du bist angemeldet",
+    "signedInAs": "Angemeldet als {{email}}.",
+    "signOut": "Abmelden",
+    "signingOut": "Du wirst abgemeldet…",
+    "openJournal": "Öffne dein Gebetstagebuch",
+    "notConfigured": "Die Anmeldung wird noch angebunden. Bitte schau bald wieder vorbei.",
+    "errors": {
+      "emailRequired": "Bitte gib deine E-Mail-Adresse ein.",
+      "sendFailed": "Wir konnten den Anmeldelink nicht senden. Bitte versuch es gleich noch einmal."
+    }
+  },
+  "push": {
+    "heading": "Wöchentliche Erinnerungen",
+    "description": "Erhalte einen sanften Anstoß 30 Minuten vor jeder Zusammenkunft.",
+    "toggleEnable": "Wöchentliche Erinnerungen aktivieren",
+    "toggleDisable": "Erinnerungen deaktivieren",
+    "toggleSubscribed": "Erinnerungen sind aktiv",
+    "toggleHint": "Du erhältst 30 Minuten vor jeder Zusammenkunft eine Push-Nachricht. Du kannst sie jederzeit ausschalten.",
+    "toggleUnsupported": "Benachrichtigungen sind in diesem Browser noch nicht verfügbar.",
+    "toggleUnsupportedIos": "Füge diese App zuerst zu deinem Startbildschirm hinzu und komm dann zurück, um Erinnerungen zu aktivieren.",
+    "toggleNotConfigured": "Push-Benachrichtigungen sind noch nicht eingerichtet — schau bald wieder vorbei.",
+    "toggleDenied": "Benachrichtigungen sind in deinen Browser-Einstellungen blockiert.",
+    "enabling": "Wird aktiviert…",
+    "disabling": "Wird deaktiviert…",
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuch es gleich noch einmal."
+  },
+  "connect": {
+    "title": "Kontakt",
+    "description": "Ein Raum, um die Gemeinde auch zwischen den Sonntagen zu erreichen — bald mit persönlichen Tools, heute mit einer direkten Verbindung zum Seelsorgeteam.",
+    "comingSoonBadgeSignedOut": "Weitere Kontakt-Funktionen (Gruppen, Rundnachrichten, Push) werden noch gebaut. Melde dich unten an, um schon heute das Gebetstagebuch zu nutzen.",
+    "roadmapHeading": "Was als Nächstes kommt",
+    "roadmapItems": [
+      "Mitglieder-Anmeldung mit deinem eigenen Profil",
+      "Ein privates Gebetstagebuch, das dich begleitet",
+      "Anmeldungen für Kleingruppen und Dienstteams",
+      "Sanfte Push-Benachrichtigungen für Gebet und Ankündigungen"
+    ],
+    "contactHeading": "Erreiche Pastor Stephen Essah",
+    "contactBody": "Bis die In-App-Nachrichten bereit sind, ist der sicherste Weg zum Kontakt die E-Mail — oder persönlich nach dem Sonntagsgottesdienst. Wir lesen jede Nachricht und antworten mit Sorgfalt.",
+    "addressHeading": "Wo und wann",
+    "serviceTime": "Sonntagsgottesdienst um 13:30 Uhr"
+  },
+  "notFound": {
+    "title": "Diese Seite gibt es nicht mehr",
+    "description": "Wir konnten nicht finden, wonach du gesucht hast. Die Seite wurde womöglich entfernt, während sich die App weiterentwickelt hat.",
+    "backHome": "Zurück zum Start"
+  },
+  "legal": {
+    "title": "Rechtliches",
+    "subtitle": "Impressum, Datenschutzerklärung und AVV (auf Deutsch, wie gesetzlich vorgeschrieben).",
+    "footerLink": "Rechtliches",
+    "backHome": "Zurück zum Start"
+  },
+  "admin": {
+    "title": "Admin-Vorschau",
+    "helper": "Diese Vorschau zeigt den künftigen Verwaltungsbereich für Inhalte. Anmeldung, Berechtigungen und Bearbeitungsfunktionen folgen, sobald das Backend angebunden ist.",
+    "readOnlyBadge": "Nur-Lese-Vorschau",
+    "openSection": "Öffnen",
+    "rowsCount": "{{count}} Einträge",
+    "backToAdmin": "Zurück zur Admin-Vorschau",
+    "notFound": "Wir konnten diesen Verwaltungsbereich nicht finden.",
+    "push": {
+      "title": "Push-Benachrichtigung senden",
+      "description": "Damit wird eine Benachrichtigung an jedes angemeldete Mitglied gesendet, das Erinnerungen aktiviert hat. Nutze das sparsam.",
+      "titleLabel": "Titel",
+      "titlePlaceholder": "Kurz und klar (max. 60 Zeichen)",
+      "bodyLabel": "Nachricht",
+      "bodyPlaceholder": "Was sollen die Leute wissen? (max. 200 Zeichen)",
+      "urlLabel": "URL öffnen (optional)",
+      "urlPlaceholder": "/ — oder ein Pfad innerhalb der App",
+      "sendButton": "An alle senden",
+      "sending": "Wird gesendet…",
+      "confirmTitle": "Diese Benachrichtigung senden?",
+      "confirmBody": "Dadurch wird jedes Mitglied benachrichtigt, das Erinnerungen aktiviert hat. Nach dem Senden gibt es keinen Rückruf.",
+      "confirmSend": "Jetzt senden",
+      "confirmCancel": "Abbrechen",
+      "successTitle": "Benachrichtigung gesendet",
+      "success": "An {{sent}} Gerät(e) gesendet. Fehlgeschlagen: {{failed}}.",
+      "errorGeneric": "Wir konnten die Benachrichtigung nicht senden. Bitte versuch es erneut.",
+      "errors": {
+        "titleRequired": "Bitte gib einen Titel an.",
+        "titleTooLong": "Der Titel ist zu lang (max. 60 Zeichen).",
+        "bodyRequired": "Bitte gib eine Nachricht ein.",
+        "bodyTooLong": "Die Nachricht ist zu lang (max. 200 Zeichen)."
+      }
+    }
+  }
+}

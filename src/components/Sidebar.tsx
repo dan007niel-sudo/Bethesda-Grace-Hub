@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { PRIMARY_NAV } from './Navigation';
 import { Wordmark } from './Wordmark';
 import { Logo } from './Logo';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Sidebar() {
   const { t } = useTranslation();
@@ -47,6 +48,7 @@ export function Sidebar() {
         <NavLink to="/legal" className="hover:text-burgundy">
           {t('legal.footerLink')}
         </NavLink>
+        <LanguageSwitcher />
       </div>
     </aside>
   );
