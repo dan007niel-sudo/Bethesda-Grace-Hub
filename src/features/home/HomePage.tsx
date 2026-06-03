@@ -103,11 +103,13 @@ export default function HomePage() {
               </span>
             </p>
             <blockquote className="mt-4 verse text-burgundy/85 text-lg leading-relaxed px-2">
-              “{devotional.verse}”
+              “{demoMode ? t('home.scriptureVerse') : devotional.verse}”
             </blockquote>
-            <p className="mt-2 text-sm text-charcoal/70">{devotional.reference}</p>
+            <p className="mt-2 text-sm text-charcoal/70">
+              {demoMode ? t('home.scriptureRef') : devotional.reference}
+            </p>
             <p className="mt-4 text-charcoal/80 max-w-xl mx-auto leading-relaxed">
-              {devotional.reflection}
+              {demoMode ? t('home.devotional.demoReflection') : devotional.reflection}
             </p>
           </>
         ) : (
