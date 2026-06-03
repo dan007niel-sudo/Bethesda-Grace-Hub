@@ -50,9 +50,7 @@ export default function AssistantPage() {
     if (demoMode || !isAssistantConfigured) {
       // Fallback: look up the suggested prompt's mock response if it matches.
       const match = (prompts ?? []).find((p) => p.prompt === message);
-      const reply =
-        match?.response ??
-        "This visitor preview uses prepared answers. Please try one of the suggested questions.";
+      const reply = match?.response ?? t('assistant.demoReply');
       setTimeout(() => {
         setTurns((prev) => [...prev, { role: 'assistant', text: reply }]);
         setBusy(false);
@@ -101,10 +99,7 @@ export default function AssistantPage() {
 
       <PreviewNotice>{t('assistant.previewNotice')}</PreviewNotice>
       {demoMode ? (
-        <PreviewNotice>
-          Visitor preview: suggested questions use prepared answers, and free-form assistant
-          calls are disabled.
-        </PreviewNotice>
+        <PreviewNotice>{t('assistant.demoNotice')}</PreviewNotice>
       ) : null}
 
       {/* Conversation */}
@@ -184,7 +179,7 @@ export default function AssistantPage() {
           disabled={inputDisabled || !isAssistantConfigured}
           placeholder={
             demoMode
-              ? 'Free questions are disabled in visitor preview.'
+              ? t('assistant.demoInputPlaceholder')
               : isAssistantConfigured
               ? t('assistant.inputPlaceholder')
               : t('assistant.inputPlaceholderDisabled')

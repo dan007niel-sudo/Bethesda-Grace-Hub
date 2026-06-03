@@ -131,10 +131,10 @@ export default function JournalPage() {
       {demoMode ? (
         <Card padding="md">
           <h2 className="text-base font-semibold text-charcoal mb-2">
-            Visitor preview
+            {t('journal.demoTitle')}
           </h2>
           <p className="text-sm text-charcoal/80 leading-relaxed">
-            Private journal entries, updates and deletes are disabled in this preview mode.
+            {t('journal.demoBody')}
           </p>
         </Card>
       ) : !isSupabaseConfigured ? (

@@ -85,10 +85,7 @@ export default function PrayerPage() {
 
       <PastoralNote>{t('prayer.pastoralNote')}</PastoralNote>
       {demoMode ? (
-        <PreviewNotice>
-          Visitor preview: this form validates locally, but no email is opened and no request is
-          submitted.
-        </PreviewNotice>
+        <PreviewNotice>{t('prayer.demoNotice')}</PreviewNotice>
       ) : null}
 
       <form onSubmit={handleSubmit} noValidate className="mt-6">
@@ -170,7 +167,7 @@ export default function PrayerPage() {
         <div className="mt-6 flex flex-wrap gap-2">
           <Button type="submit" variant="primary">
             <Mail size={16} aria-hidden="true" />
-            {demoMode ? 'Preview request locally' : t('prayer.form.submit')}
+            {demoMode ? t('prayer.demoSubmit') : t('prayer.form.submit')}
           </Button>
           <Button type="button" variant="ghost" onClick={handleCancel}>
             {t('common.cancel')}
@@ -181,7 +178,7 @@ export default function PrayerPage() {
       {demoSubmitted ? (
         <Card padding="md" className="mt-6 border-burgundy/30 bg-burgundy/5">
           <p className="text-sm font-medium text-charcoal">
-            Visitor preview only: no prayer request was sent.
+            {t('prayer.demoSubmitted')}
           </p>
         </Card>
       ) : null}

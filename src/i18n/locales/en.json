@@ -12,7 +12,8 @@
     "language": "Language",
     "changeLanguage": "Change language",
     "langEnglish": "English",
-    "langGerman": "German"
+    "langGerman": "German",
+    "visitorPreviewBanner": "Visitor preview: live submissions, sign-in, push notifications and live assistant calls are disabled."
   },
   "nav": {
     "home": "Home",
@@ -82,6 +83,9 @@
     "errorGeneric": "Something went wrong. Please try again in a moment.",
     "previewNotice": "The Grace Assistant is grounded in our church's published teaching. For deeper pastoral or theological conversations, reach out to Pastor Stephen Essah or the leadership team.",
     "pastoralNote": "The assistant is here to guide and encourage. It does not replace pastoral care, church leadership, or professional support in urgent situations.",
+    "demoReply": "This visitor preview uses prepared answers. Please try one of the suggested questions.",
+    "demoNotice": "Visitor preview: suggested questions use prepared answers, and free-form assistant calls are disabled.",
+    "demoInputPlaceholder": "Free questions are disabled in visitor preview.",
     "youLabel": "You",
     "assistantLabel": "Grace Assistant"
   },
@@ -108,6 +112,9 @@
       }
     },
     "mailtoNote": "In this preview version, prayer requests are sent through your email app. A secure in-app submission system will be added when the church backend is connected.",
+    "demoNotice": "Visitor preview: this form validates locally, but no email is opened and no request is submitted.",
+    "demoSubmit": "Preview request locally",
+    "demoSubmitted": "Visitor preview only: no prayer request was sent.",
     "subjectPrefix": "Prayer request",
     "journalCtaTitle": "Want to keep it private?",
     "journalCtaBody": "Your Prayer Journal is a private space for what's on your heart — no one else sees it, and you can come back to it any time.",
@@ -117,6 +124,8 @@
     "title": "Prayer Journal",
     "description": "A private space to write down what you are praying for — and to come back when prayers are answered.",
     "pastoralNote": "Your journal is private to you. Only you can read what you write here.",
+    "demoTitle": "Visitor preview",
+    "demoBody": "Private journal entries, updates and deletes are disabled in this preview mode.",
     "addLabel": "What's on your heart today?",
     "addPlaceholder": "Write a prayer, a hope, a worry, a thanksgiving…",
     "addButton": "Save to journal",
@@ -161,6 +170,8 @@
     "signingOut": "Signing out…",
     "openJournal": "Open your Prayer Journal",
     "notConfigured": "Sign-in is still being connected. Please check back soon.",
+    "demoTitle": "Visitor preview",
+    "demoBody": "Sign-in and private journal writes are disabled in this preview mode.",
     "errors": {
       "emailRequired": "Please enter your email.",
       "sendFailed": "We couldn't send the sign-in link. Please try again in a moment."
@@ -185,6 +196,7 @@
     "title": "Connect",
     "description": "A space to reach the church between Sundays — soon with personal tools, today with a direct line to the pastoral team.",
     "comingSoonBadgeSignedOut": "More connect features (groups, broadcast, push) are still being built. Sign in below to use the prayer journal today.",
+    "demoNotice": "Visitor preview: sign-in, private journal access and push subscriptions are disabled.",
     "roadmapHeading": "What's coming",
     "roadmapItems": [
       "Member sign-in with your own profile",

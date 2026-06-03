@@ -30,7 +30,7 @@ export function AppShell() {
         </header>
         {demoMode ? (
           <div className="border-b border-gold/40 bg-burgundy px-4 py-2 text-center text-[11px] font-semibold uppercase tracking-wide text-white">
-            Visitor preview: live submissions, sign-in, push notifications and live assistant calls are disabled.
+            {t('common.visitorPreviewBanner')}
           </div>
         ) : null}
         <main
