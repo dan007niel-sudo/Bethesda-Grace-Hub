@@ -38,7 +38,9 @@
       "prayerRequest": "Ein Gebetsanliegen senden",
       "prayerRequestSub": "Wir beten mit dir",
       "connect": "Mit der Gemeinde in Kontakt treten",
-      "connectSub": "Erreiche einen Pastor und sieh, was als Nächstes kommt"
+      "connectSub": "Erreiche einen Pastor und sieh, was als Nächstes kommt",
+      "readingPlan": "Bibelleseplan",
+      "readingPlanSub": "Der heutige Abschnitt"
     },
     "events": {
       "title": "Kommende Termine",
@@ -197,6 +199,34 @@
     "contactBody": "Bis die In-App-Nachrichten bereit sind, ist der sicherste Weg zum Kontakt die E-Mail — oder persönlich nach dem Sonntagsgottesdienst. Wir lesen jede Nachricht und antworten mit Sorgfalt.",
     "addressHeading": "Wo und wann",
     "serviceTime": "Sonntagsgottesdienst um 13:30 Uhr"
+  },
+  "reading": {
+    "title": "Bibelleseplan",
+    "description": "Eine 14-tägige Reise durch Gnade und neues Leben in Christus. Jeden Tag ein kurzer Abschnitt.",
+    "todayBadge": "Heute",
+    "progress": "{{done}} von {{total}} Tagen",
+    "streak_one": "{{count}} Tag in Folge",
+    "streak_other": "{{count}} Tage in Folge",
+    "markComplete": "Tag {{day}} als gelesen markieren",
+    "markIncomplete": "Tag {{day}} als nicht gelesen markieren",
+    "dayLabel": "Tag {{day}}",
+    "completedAll": "Du hast den Plan abgeschlossen — gut gemacht. Trag seine Gnade in jeden neuen Tag.",
+    "plan": [
+      { "reference": "Römer 3,23–24", "theme": "Alle haben gesündigt — frei gerechtfertigt aus seiner Gnade." },
+      { "reference": "Epheser 2,8–9", "theme": "Aus Gnade gerettet durch den Glauben, nicht aus Werken." },
+      { "reference": "Johannes 3,16–17", "theme": "Gott liebte die Welt so sehr, dass er seinen Sohn gab." },
+      { "reference": "Lukas 15,11–24", "theme": "Der Vater läuft dem heimkehrenden Sohn entgegen." },
+      { "reference": "Psalm 103,8–12", "theme": "Er entfernt unsere Schuld so weit wie Osten vom Westen." },
+      { "reference": "2. Korinther 5,17", "theme": "In Christus bist du eine neue Schöpfung." },
+      { "reference": "Titus 2,11–12", "theme": "Die Gnade erzieht uns zu einem neuen Leben." },
+      { "reference": "Römer 5,8", "theme": "Christus starb für uns, als wir noch Sünder waren." },
+      { "reference": "1. Johannes 1,9", "theme": "Er ist treu und gerecht und vergibt uns." },
+      { "reference": "Galater 2,20", "theme": "Nicht mehr ich lebe, sondern Christus lebt in mir." },
+      { "reference": "Klagelieder 3,22–23", "theme": "Seine Barmherzigkeit ist jeden Morgen neu." },
+      { "reference": "Matthäus 11,28–30", "theme": "Kommt zu mir, alle Mühseligen, und findet Ruhe." },
+      { "reference": "Römer 8,1", "theme": "So gibt es jetzt keine Verdammnis in Christus Jesus." },
+      { "reference": "Epheser 3,17–19", "theme": "In seiner unermesslichen Liebe verwurzelt und gegründet." }
+    ]
   },
   "notFound": {
     "title": "Diese Seite gibt es nicht mehr",

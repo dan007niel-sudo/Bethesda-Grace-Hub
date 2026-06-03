@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Sparkles, HandHeart, UsersRound, MapPin } from 'lucide-react';
+import { Sparkles, HandHeart, UsersRound, BookOpen, MapPin } from 'lucide-react';
 import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { EmptyState } from '../../components/EmptyState';
@@ -82,6 +82,12 @@ export default function HomePage() {
       icon: UsersRound,
       titleKey: 'home.quickActions.connect',
       subKey: 'home.quickActions.connectSub',
+    },
+    {
+      to: '/reading',
+      icon: BookOpen,
+      titleKey: 'home.quickActions.readingPlan',
+      subKey: 'home.quickActions.readingPlanSub',
     },
   ];
 
