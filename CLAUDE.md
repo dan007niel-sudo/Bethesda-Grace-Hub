@@ -48,7 +48,7 @@ the only backend.
 | `src/data/knowledge.md` | **The truth for the AI.** Everything the Grace Assistant knows about the church. Edit here → `npm run knowledge:sync` → redeploy function. |
 | `src/i18n/locales/en.json` | **The truth for UI copy.** Every user-facing string in the app. No hardcoded strings outside `src/features/dev/`. |
 | `src/data/events.ts` | Weekly schedule + biweekly recurrence + Zoom info + church address constants. |
-| `src/data/sermons.ts` | Placeholder sermon archive — replaced with real recordings later. |
+| `src/data/announcements.ts` | Church-family announcements shown on Home. |
 | `src/data/admin.ts` | Mock rows for the read-only Admin Preview. |
 | `supabase/functions/chat/index.ts` | The AI proxy. Holds the system prompt scaffold; imports `_knowledge.ts` (generated). |
 | `scripts/sync-knowledge.mjs` | Bundles knowledge.md into `_knowledge.ts` for the function. |
@@ -58,13 +58,13 @@ the only backend.
 ## Conventions (non-negotiable)
 
 1. **No hardcoded user-facing strings in components.** Every string goes through `t('key')` with the key defined in `en.json`. Exception: `src/features/dev/` is explicitly dev-only and exempt (file has a top-of-file comment saying so).
-2. **Data is accessed via async loaders** (`getSermons()`, `getEvents()`, …) — not by importing raw arrays. Loaders live in `src/data/*.ts`. This is what lets us swap to Supabase later without touching pages.
+2. **Data is accessed via async loaders** (`getEvents()`, `getAnnouncements()`, …) — not by importing raw arrays. Loaders live in `src/data/*.ts`. This is what lets us swap to Supabase later without touching pages.
 3. **Colors come from design tokens**, never hex literals. Use Tailwind classes `text-burgundy`, `bg-cream`, `border-soft-border`, etc.
 4. **Charcoal text opacity ≥ /70** for any visible text on cream. Lower opacities fail WCAG AA contrast. `/50` etc. is only OK for disabled states (WCAG-exempt).
 5. **Icon-only buttons must have `aria-label`** (use `<IconButton label="…">`, which enforces it).
 6. **Forms** — `FormField` handles label/`aria-describedby`/`aria-invalid`/`role="alert"` correctly; don't reinvent these.
 7. **No mock success states.** Prayer form opens `mailto:` honestly. Admin Preview is read-only. Grace Assistant says "I don't know" instead of inventing.
-8. **MVP non-goals** (do not silently add): real auth, database, Supabase Auth UI, sermon media playback, dark mode, offline data caching, push notifications. These are roadmap items, not drift.
+8. **Already built beyond the original MVP** (no longer non-goals — do not "revert as drift"): magic-link auth + Supabase database with RLS (prayer journal), and web push notifications (`send-push` + `cron-reminders`). **Genuine non-goals** (do not silently add): a prebuilt Supabase Auth UI library (we use a custom magic-link `SignInCard`), sermon media playback, dark mode, offline data caching. These remain roadmap items, not drift.
 
 ## Deploy workflow
 
