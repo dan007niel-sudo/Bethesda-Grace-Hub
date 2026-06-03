@@ -86,7 +86,7 @@ serve(async (req) => {
     console.error('ALLOWED_ORIGIN not set');
     return new Response(
       JSON.stringify({ error: 'Misconfigured: ALLOWED_ORIGIN not set' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } },
+      { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders(req) } },
     );
   }
 
@@ -201,6 +201,7 @@ serve(async (req) => {
             temperature: 0.5,
             maxOutputTokens: 1024,
             topP: 0.95,
+            thinkingConfig: { thinkingBudget: 0 },
           },
         }),
       },
