@@ -4,6 +4,7 @@ import { BottomNav } from './BottomNav';
 import { Sidebar } from './Sidebar';
 import { Wordmark } from './Wordmark';
 import { Logo } from './Logo';
+import { LanguageSwitcher } from './LanguageSwitcher';
 import { useDemoMode } from '../lib/demoMode';
 
 export function AppShell() {
@@ -22,6 +23,9 @@ export function AppShell() {
               <Logo size={28} decorative />
               <Wordmark size="md" />
             </NavLink>
+            <div className="ml-auto">
+              <LanguageSwitcher />
+            </div>
           </div>
         </header>
         {demoMode ? (

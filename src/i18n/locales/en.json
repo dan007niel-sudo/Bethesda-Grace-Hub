@@ -8,7 +8,11 @@
     "learnMore": "Learn more",
     "back": "Back",
     "viewAll": "View all",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "language": "Language",
+    "changeLanguage": "Change language",
+    "langEnglish": "English",
+    "langGerman": "German"
   },
   "nav": {
     "home": "Home",
