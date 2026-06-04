@@ -81,7 +81,7 @@ function Impressum() {
         <p>
           <strong>Bethesda Grace Hub</strong>
           <br />
-          Daniel Lordson Arnan, Einzelunternehmen
+          Daniel Lordson Arnan, Freiberufler
           <br />
           Weselerstr. 120
           <br />
@@ -123,7 +123,7 @@ function Datenschutz() {
     <>
       <Section heading="1. Verantwortlicher">
         <p>
-          Verantwortlich für die Datenverarbeitung ist Daniel Lordson Arnan, Einzelunternehmen,
+          Verantwortlich für die Datenverarbeitung ist Daniel Lordson Arnan, Freiberufler,
           Weselerstr. 120, 45478 Mülheim an der Ruhr, Deutschland. Die App wird unter dem Namen{' '}
           <strong>Bethesda Grace Hub</strong> für die Gemeinde Bethesda Evangelical Church · House
           of Grace bereitgestellt.
@@ -352,7 +352,7 @@ function AVV() {
         <p>
           Dieser AVV wird zwischen der <strong>Bethesda Evangelical Church · House of Grace</strong>,
           Langestr. 19A, 49080 Osnabrück, als Auftraggeber und Daniel Lordson Arnan,
-          Einzelunternehmen, Weselerstr. 120, 45478 Mülheim an der Ruhr, als Anbieter von Bethesda
+          Freiberufler, Weselerstr. 120, 45478 Mülheim an der Ruhr, als Anbieter von Bethesda
           Grace Hub und Auftragsverarbeiter geschlossen.
         </p>
       </Section>
