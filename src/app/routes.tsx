@@ -4,6 +4,7 @@ import { AppShell } from '../components/AppShell';
 import HomePage from '../features/home/HomePage';
 import AssistantPage from '../features/assistant/AssistantPage';
 import PrayerPage from '../features/prayer/PrayerPage';
+import ReadingPlanPage from '../features/reading/ReadingPlanPage';
 import ConnectPage from '../features/connect/ConnectPage';
 import AdminPreviewPage from '../features/admin/AdminPreviewPage';
 import AdminSectionPage from '../features/admin/AdminSectionPage';
@@ -41,6 +42,7 @@ export const router = createBrowserRouter([
       { path: '/demo', element: <HomePage /> },
       { path: '/assistant', element: <AssistantPage /> },
       { path: '/prayer', element: <PrayerPage /> },
+      { path: '/reading', element: <ReadingPlanPage /> },
       { path: '/journal', element: lazyRoute(<JournalPage />) },
       { path: '/auth/callback', element: lazyRoute(<AuthCallbackPage />) },
       { path: '/connect', element: <ConnectPage /> },
