@@ -48,9 +48,7 @@ export default function ConnectPage() {
       ) : null}
 
       {demoMode ? (
-        <PreviewNotice>
-          Visitor preview: sign-in, private journal access and push subscriptions are disabled.
-        </PreviewNotice>
+        <PreviewNotice>{t('connect.demoNotice')}</PreviewNotice>
       ) : null}
 
       {!demoMode && isSupabaseConfigured ? (

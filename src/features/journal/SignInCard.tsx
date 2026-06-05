@@ -27,10 +27,10 @@ export function SignInCard({ redirectTo }: SignInCardProps) {
     return (
       <Card padding="md">
         <h2 className="text-base font-semibold text-charcoal mb-2">
-          Visitor preview
+          {t('auth.demoTitle')}
         </h2>
         <p className="text-sm text-charcoal/80 leading-relaxed">
-          Sign-in and private journal writes are disabled in this preview mode.
+          {t('auth.demoBody')}
         </p>
       </Card>
     );

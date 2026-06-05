@@ -12,7 +12,8 @@
     "language": "Sprache",
     "changeLanguage": "Sprache ändern",
     "langEnglish": "English",
-    "langGerman": "Deutsch"
+    "langGerman": "Deutsch",
+    "visitorPreviewBanner": "Besuchervorschau: Live-Einsendungen, Anmeldung, Push-Benachrichtigungen und Live-Anfragen an den Assistenten sind deaktiviert."
   },
   "nav": {
     "home": "Start",
@@ -83,6 +84,9 @@
     "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuch es gleich noch einmal.",
     "previewNotice": "Der Grace Assistant gründet auf der veröffentlichten Lehre unserer Gemeinde. Für tiefere seelsorgerliche oder theologische Gespräche wende dich an Pastor Stephen Essah oder das Leitungsteam.",
     "pastoralNote": "Der Assistent ist da, um zu begleiten und zu ermutigen. Er ersetzt keine Seelsorge, keine Gemeindeleitung und keine professionelle Unterstützung in dringenden Situationen.",
+    "demoReply": "Diese Besuchervorschau nutzt vorbereitete Antworten. Bitte probiere eine der vorgeschlagenen Fragen.",
+    "demoNotice": "Besuchervorschau: Vorgeschlagene Fragen nutzen vorbereitete Antworten, und freie Anfragen an den Assistenten sind deaktiviert.",
+    "demoInputPlaceholder": "Freie Fragen sind in der Besuchervorschau deaktiviert.",
     "youLabel": "Du",
     "assistantLabel": "Grace Assistant"
   },
@@ -109,6 +113,9 @@
       }
     },
     "mailtoNote": "In dieser Vorschauversion werden Gebetsanliegen über deine E-Mail-App gesendet. Ein sicheres Einreichungssystem in der App folgt, sobald das Gemeinde-Backend angebunden ist.",
+    "demoNotice": "Besuchervorschau: Dieses Formular wird lokal geprüft, aber es wird keine E-Mail geöffnet und kein Anliegen gesendet.",
+    "demoSubmit": "Anliegen lokal in der Vorschau prüfen",
+    "demoSubmitted": "Nur Besuchervorschau: Es wurde kein Gebetsanliegen gesendet.",
     "subjectPrefix": "Gebetsanliegen",
     "journalCtaTitle": "Möchtest du es für dich behalten?",
     "journalCtaBody": "Dein Gebetstagebuch ist ein privater Raum für das, was dich bewegt — niemand sonst sieht es, und du kannst jederzeit dorthin zurückkehren.",
@@ -118,6 +125,8 @@
     "title": "Gebetstagebuch",
     "description": "Ein privater Raum, um aufzuschreiben, wofür du betest — und um zurückzukehren, wenn Gebete erhört werden.",
     "pastoralNote": "Dein Tagebuch ist privat. Nur du kannst lesen, was du hier schreibst.",
+    "demoTitle": "Besuchervorschau",
+    "demoBody": "Private Tagebucheinträge, Änderungen und Löschungen sind in diesem Vorschaumodus deaktiviert.",
     "addLabel": "Was bewegt dich heute?",
     "addPlaceholder": "Schreib ein Gebet, eine Hoffnung, eine Sorge, einen Dank…",
     "addButton": "Im Tagebuch speichern",
@@ -162,6 +171,8 @@
     "signingOut": "Du wirst abgemeldet…",
     "openJournal": "Öffne dein Gebetstagebuch",
     "notConfigured": "Die Anmeldung wird noch angebunden. Bitte schau bald wieder vorbei.",
+    "demoTitle": "Besuchervorschau",
+    "demoBody": "Anmeldung und private Tagebucheinträge sind in diesem Vorschaumodus deaktiviert.",
     "errors": {
       "emailRequired": "Bitte gib deine E-Mail-Adresse ein.",
       "sendFailed": "Wir konnten den Anmeldelink nicht senden. Bitte versuch es gleich noch einmal."
@@ -186,6 +197,7 @@
     "title": "Kontakt",
     "description": "Ein Raum, um die Gemeinde auch zwischen den Sonntagen zu erreichen — bald mit persönlichen Tools, heute mit einer direkten Verbindung zum Seelsorgeteam.",
     "comingSoonBadgeSignedOut": "Weitere Kontakt-Funktionen (Gruppen, Rundnachrichten, Push) werden noch gebaut. Melde dich unten an, um schon heute das Gebetstagebuch zu nutzen.",
+    "demoNotice": "Besuchervorschau: Anmeldung, Zugang zum privaten Tagebuch und Push-Abos sind deaktiviert.",
     "roadmapHeading": "Was als Nächstes kommt",
     "roadmapItems": [
       "Mitglieder-Anmeldung mit deinem eigenen Profil",
